@@ -9,11 +9,11 @@ Let's first make sure the address exists and add it to a variable so we can type
 
 ```bash
  sui client active-address
- # 0xXXXXXXXXXXXXXXXXXXXXX
- address="0xXXXXXXXXXXXXXXXXXXXXX"
+ # 0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12
+ address="0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"
 ```
 
-Here `0xXXXXXXXXXXXXXXXXXXXXX` is a placeholder and your address should appear, if it doesn't please follow the instructions <a href="https://docs.sui.io/build/devnet">here</a> to connect to the Sui network and get an address. If you choose a local installation then proceed to also get some SUI.
+Here `0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12` is the address we will use, if the sui command does not return an address please follow the instructions <a href="https://docs.sui.io/build/devnet">here</a> to connect to the Sui network and get one. If you choose a local installation then proceed to also get some SUI.
 
 Let's fill the address with some SUI. Join our discord channel <a href="https://discord.gg/sui">https://discord.gg/sui</a> and after the verification is done check the faucet channel <a href="https://discord.com/channels/916379725201563759/971488439931392130">devnet-faucet</a> and type `!faucet <address>` in the channel where address is your new address.
 
@@ -40,5 +40,61 @@ curl -X POST -H 'Content-type: application/json' --data-raw "$data" $rpc
 The JSON response should look like:
 
 ```JSON
-{"jsonrpc":"2.0","result":[{"objectId":"0x11aee1d5736683a2285251306b83068983119d96","version":1,"digest":"Bu5RPYiVWDDX4IshFqB8vsUdzBptTkhNK/Hm/b06wEA=","type":"0x2::coin::Coin<0x2::sui::SUI>","owner":{"AddressOwner":"0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"},"previousTransaction":"8Dpc1+03kCviQRrB4hMUDT1z3bF+ZhlHtkG3RXHKuBg="},{"objectId":"0x3f20cc6615c199496a6ff1528a8a23823a3ba3e2","version":1,"digest":"bBaJ31nkAS4Swy9mwDmWCrR5fFeVMufteAJkQTjAH38=","type":"0x2::coin::Coin<0x2::sui::SUI>","owner":{"AddressOwner":"0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"},"previousTransaction":"crQ008Z2bRbJGW3fWGYJQ21Hn3XryEj/idtk/Z7CASE="},{"objectId":"0x47effe51732d0b70e1a2c6b04c7fe1150fcc925d","version":1,"digest":"XYqAK1YseJWTEcOO62ysZ5jOgCtYiuH1ggl1TfGlw7M=","type":"0x2::coin::Coin<0x2::sui::SUI>","owner":{"AddressOwner":"0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"},"previousTransaction":"MhhwQnI0F2lsZi8jllPgZ8Vg4+LQdx2k8CFzK0uElWM="},{"objectId":"0x52dc4b2cbda2f25aa16abce3fa601590ffb4460d","version":1,"digest":"L5Nli5HyIM2slXS0/10mfCLhRlz8mwLa4po39PiFchE=","type":"0x2::coin::Coin<0x2::sui::SUI>","owner":{"AddressOwner":"0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"},"previousTransaction":"I9gs5Mg99iRVZoDqHOac2dov5UZLeBlHHBpBKYy2aKA="},{"objectId":"0x5c0540ad3c3b5baf0b7b06cb4d8b0f8189bcc95a","version":1,"digest":"KPCGtTtKC07fGHSUUtqplAqHiH1b5yE+VMpJb7fr05Q=","type":"0x2::coin::Coin<0x2::sui::SUI>","owner":{"AddressOwner":"0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"},"previousTransaction":"lKtBzvqCts//AkEj+HtmGV0meI+thttgWwHkbWrnK7M="},{"objectId":"0x6e42879a647b79de721ede51f16b66bcd918cb15","version":1,"digest":"x/blew30LCSoOVa9HY8k+DZyZgWEV6jWSgcqvaUklU0=","type":"0x2::coin::Coin<0x2::sui::SUI>","owner":{"AddressOwner":"0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"},"previousTransaction":"ehKQiB6IwupCO+yBi0qVz9HVU9n+BNJ22A9vN5f7Fsc="},{"objectId":"0x6ebf4288eb85ec536f8b57ba0730346d2e24d143","version":1,"digest":"5SpGRfPslVjlnATvKCDCmtHXmIurVpuAVF4GV9MOkds=","type":"0x2::coin::Coin<0x2::sui::SUI>","owner":{"AddressOwner":"0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"},"previousTransaction":"m763isSnYYSCJ+CGdsa1qdHfbAleHzrZ7OQ/DrhDSVM="},{"objectId":"0x7ba3749248588815968c58e911c573992152a694","version":1,"digest":"KgXQzzyMipzi6objnv7E4rU6EUwArqVuU1JZa+VxDqw=","type":"0x2::coin::Coin<0x2::sui::SUI>","owner":{"AddressOwner":"0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"},"previousTransaction":"YoKjKUx74O5vy1suheZrdF03vzxSv36PAGNHTXzmapI="},{"objectId":"0xd971beea67f4ced0974476d2f729592b6c02e7fd","version":1,"digest":"Py72Vj86gbtFnN8mpbPgONTbQali7lYS8E3U2Ur/y/s=","type":"0x2::coin::Coin<0x2::sui::SUI>","owner":{"AddressOwner":"0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"},"previousTransaction":"ja4HZwtTUEmxilPLGmIVvW5YKfxRfjZBrNdxehlA4q0="},{"objectId":"0xf345d570959733323259346ac57711f4e98716a0","version":1,"digest":"FMMsQnmNKYXlnpCHZtaQ+xicr7XQ29bZuGZdB1WH+vE=","type":"0x2::coin::Coin<0x2::sui::SUI>","owner":{"AddressOwner":"0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"},"previousTransaction":"oQ0V0UxrUGJpnnLoaRbf9stnZ8ruO1SRGTX7l+NM8bM="}],"id":1}
+{"jsonrpc":"2.0",
+"result":[
+    {
+        "objectId":"0x11aee1d5736683a2285251306b83068983119d96",
+        "version":1,
+        "digest":"Bu5RPYiVWDDX4IshFqB8vsUdzBptTkhNK/Hm/b06wEA=",
+        "type":"0x2::coin::Coin<0x2::sui::SUI>",
+        "owner":{"AddressOwner":"0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"},
+        "previousTransaction":"8Dpc1+03kCviQRrB4hMUDT1z3bF+ZhlHtkG3RXHKuBg="
+    },{
+        "objectId":"0x3f20cc6615c199496a6ff1528a8a23823a3ba3e2",
+        "version":1,
+        "digest":"bBaJ31nkAS4Swy9mwDmWCrR5fFeVMufteAJkQTjAH38=",
+        "type":"0x2::coin::Coin<0x2::sui::SUI>",
+        "owner":{"AddressOwner":"0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"},
+        "previousTransaction":"crQ008Z2bRbJGW3fWGYJQ21Hn3XryEj/idtk/Z7CASE="
+    },{
+        "objectId":"0x47effe51732d0b70e1a2c6b04c7fe1150fcc925d",
+        "version":1,
+        "digest":"XYqAK1YseJWTEcOO62ysZ5jOgCtYiuH1ggl1TfGlw7M=",
+        "type":"0x2::coin::Coin<0x2::sui::SUI>",
+        "owner":{"AddressOwner":"0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"},
+        "previousTransaction":"MhhwQnI0F2lsZi8jllPgZ8Vg4+LQdx2k8CFzK0uElWM="
+    },{
+        "objectId":"0x52dc4b2cbda2f25aa16abce3fa601590ffb4460d",
+        "version":1,
+        "digest":"L5Nli5HyIM2slXS0/10mfCLhRlz8mwLa4po39PiFchE=",
+        "type":"0x2::coin::Coin<0x2::sui::SUI>",
+        "owner":{"AddressOwner":"0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"},
+        "previousTransaction":"I9gs5Mg99iRVZoDqHOac2dov5UZLeBlHHBpBKYy2aKA="
+    },{
+        "objectId":"0x5c0540ad3c3b5baf0b7b06cb4d8b0f8189bcc95a",
+        "version":1,
+        "digest":"KPCGtTtKC07fGHSUUtqplAqHiH1b5yE+VMpJb7fr05Q=",
+        "type":"0x2::coin::Coin<0x2::sui::SUI>",
+        "owner":{"AddressOwner":"0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"},
+        "previousTransaction":"lKtBzvqCts//AkEj+HtmGV0meI+thttgWwHkbWrnK7M="
+    }
+],
+"id":1}
+```
+
+Here we formatted the output a bit, the initial one is quite hard to read. From now on we will save the output to a temporary JSON file to get it formatted and readable.
+
+We the big output we can reach several conclusions. We can see that each object in the result has an `objectId`. This `objectId` is the UID mentioned previously. It is unique for each object in the Sui network. We can see the type `0x2::coin::Coin<0x2::sui::SUI`, `0x2` address contains ??? packages that are native to Sui like the SUI Coin module, the transfer function, the TxContext global object etc... Thus `0x2::sui::SUI` is a SUI token. The owner is the address and every object has a `previousTransaction` field. The number of transactions an object has been through can be seen from `"version": 1`, all our coins are freshly minted by faucet so their version is 1, they have experienced a single transaction so far.
+
+## 2nd Example, check the details of an Object
+
+Now let's check the `objectId` for one of the previously returned coins and check more details about it using the `sui_getObject` method.
+
+```bash
+# set the id as a variable
+id="0x11aee1d5736683a2285251306b83068983119d96"
+# create the JSON
+data="{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"sui_getObject\", \"params\": ["$id"]}"
+# fire the request and save the result in a tmp file
+curl -X POST -H 'Content-type: application/json' --data-raw "$data" $rpc > tmp.json
 ```
