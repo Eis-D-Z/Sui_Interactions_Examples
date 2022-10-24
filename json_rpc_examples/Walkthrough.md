@@ -7,7 +7,7 @@ Sui will be the network and SUI will mean the token.
 All the commands that follow are meant for a bash terminal.
 Let's first make sure the address exists and add it to a variable so we can type a bit a less:
 
-```bash
+```sh
  sui client active-address
  # 0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12
  address="0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"
@@ -19,7 +19,7 @@ Let's fill the address with some SUI. Join our discord channel <a href="https://
 
 Lastly we will also bind the devnet rpc server URL to a variable:
 
-```bash
+```sh
 rpc="https://fullnode.devnet.sui.io:443"
 ```
 
@@ -29,10 +29,10 @@ Now we are ready to do our first call and see the coins we own.
 
 In Sui everything is an object. Sui is object-centric and every item (object) owns a UID. We will soon see that we own 5 objects which contain an ammount of SUI tokens. In case of SUI tokens it is easy to think of each COIN object as SUI banknotes, so we actually have 5 banknotes and we will later check their denomination. It is worth noting that there are some implications. If we want to tranfer a SUI amount that is less than the denominated value we have to get change, that is to split our banknote in smaller denominations. If we want to send 20.000 SUI but we have 5 banknotes of 10.000.000, then we must split a 10.000.000 banknote into a 980.000 SUI banknote and 20.000 SUI banknote. We then can transfer the latter, but in the process we created two new Sui objects (and deleted the initial) In many cases this happens automatically but it is very usefull to keep in mind.
 
-We are ready now to check how many SUI we have. This will be the first RPC call, the method is called `sui_getObjectsOwnedByAddress`.
+We are ready now to check how many SUI we have. This will be the first RPC call, the method is called <a href="https://docs.sui.io/sui-jsonrpc#sui_getObjectsOwnedByAddress">`sui_getObjectsOwnedByAddress`</a>.
 We will first write the JSON and save it into a variable and after that we will make the call to see what we get.
 
-```bash
+```sh
 data="{\"jsonrpc\": \"2.0\", \"method\": \"sui_getObjectsOwnedByAddress\", \"id\": 1, \"params\": [\"$address\"]}"
 curl -X POST -H 'Content-type: application/json' --data-raw "$data" $rpc
 ```
@@ -40,46 +40,62 @@ curl -X POST -H 'Content-type: application/json' --data-raw "$data" $rpc
 The JSON response should look like:
 
 ```JSON
-{"jsonrpc":"2.0",
-"result":[
-    {
-        "objectId":"0x11aee1d5736683a2285251306b83068983119d96",
-        "version":1,
-        "digest":"Bu5RPYiVWDDX4IshFqB8vsUdzBptTkhNK/Hm/b06wEA=",
-        "type":"0x2::coin::Coin<0x2::sui::SUI>",
-        "owner":{"AddressOwner":"0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"},
-        "previousTransaction":"8Dpc1+03kCviQRrB4hMUDT1z3bF+ZhlHtkG3RXHKuBg="
-    },{
-        "objectId":"0x3f20cc6615c199496a6ff1528a8a23823a3ba3e2",
-        "version":1,
-        "digest":"bBaJ31nkAS4Swy9mwDmWCrR5fFeVMufteAJkQTjAH38=",
-        "type":"0x2::coin::Coin<0x2::sui::SUI>",
-        "owner":{"AddressOwner":"0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"},
-        "previousTransaction":"crQ008Z2bRbJGW3fWGYJQ21Hn3XryEj/idtk/Z7CASE="
-    },{
-        "objectId":"0x47effe51732d0b70e1a2c6b04c7fe1150fcc925d",
-        "version":1,
-        "digest":"XYqAK1YseJWTEcOO62ysZ5jOgCtYiuH1ggl1TfGlw7M=",
-        "type":"0x2::coin::Coin<0x2::sui::SUI>",
-        "owner":{"AddressOwner":"0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"},
-        "previousTransaction":"MhhwQnI0F2lsZi8jllPgZ8Vg4+LQdx2k8CFzK0uElWM="
-    },{
-        "objectId":"0x52dc4b2cbda2f25aa16abce3fa601590ffb4460d",
-        "version":1,
-        "digest":"L5Nli5HyIM2slXS0/10mfCLhRlz8mwLa4po39PiFchE=",
-        "type":"0x2::coin::Coin<0x2::sui::SUI>",
-        "owner":{"AddressOwner":"0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"},
-        "previousTransaction":"I9gs5Mg99iRVZoDqHOac2dov5UZLeBlHHBpBKYy2aKA="
-    },{
-        "objectId":"0x5c0540ad3c3b5baf0b7b06cb4d8b0f8189bcc95a",
-        "version":1,
-        "digest":"KPCGtTtKC07fGHSUUtqplAqHiH1b5yE+VMpJb7fr05Q=",
-        "type":"0x2::coin::Coin<0x2::sui::SUI>",
-        "owner":{"AddressOwner":"0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"},
-        "previousTransaction":"lKtBzvqCts//AkEj+HtmGV0meI+thttgWwHkbWrnK7M="
-    }
-],
-"id":1}
+{
+    "jsonrpc": "2.0",
+    "result": [
+        {
+            "objectId": "0x01fdc6369b1a351114ae208a5f76cd8a974f528e",
+            "version": 1,
+            "digest": "DQMmxQRRb/yE6no9vI4sALKusT8u6h680wka+skNDgc=",
+            "type": "0x2::coin::Coin<0x2::sui::SUI>",
+            "owner": {
+                "AddressOwner": "0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"
+            },
+            "previousTransaction": "OwkO+cDnneBjAK0dwMsRWJG729aB/1dxLJPjkEA+El8="
+        },
+        {
+            "objectId": "0x1e25818441ac850364e890a162d8b0296a393e65",
+            "version": 1,
+            "digest": "DLXUtRmL9edZLmNIW0PX1wVLWQjFGDRmhCt3YW0hMUk=",
+            "type": "0x2::coin::Coin<0x2::sui::SUI>",
+            "owner": {
+                "AddressOwner": "0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"
+            },
+            "previousTransaction": "6NsFi/c0OPMIl/1BXBdKb8wp5C6wYeerPP8ksJ0o5IY="
+        },
+        {
+            "objectId": "0x4ccaa3d6a09dee91e0dad55b9718625fd62364bc",
+            "version": 1,
+            "digest": "BhjmF7C3EUhnOVZzX0fxqoWsUtLvIN6Jf/4rlL4ssFA=",
+            "type": "0x2::coin::Coin<0x2::sui::SUI>",
+            "owner": {
+                "AddressOwner": "0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"
+            },
+            "previousTransaction": "sjkMRqVaZbQVjiGgsNA9KuQ/j6DmdDOdrop/tCaBalw="
+        },
+        {
+            "objectId": "0x536b27e0dd74113f76ed441277ed73341266c5a5",
+            "version": 1,
+            "digest": "wZKmsL5y1gJZYosjwgqxlbcMVQl2fTR+b8zU6ICpChk=",
+            "type": "0x2::coin::Coin<0x2::sui::SUI>",
+            "owner": {
+                "AddressOwner": "0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"
+            },
+            "previousTransaction": "VFbdF6O/I9yQqlzwEBwj7ZIFGwb0kpwAUcHtk3iA5g0="
+        },
+        {
+            "objectId": "0x8852e991c9e3e9a07b3834621e4f938dad4ea57b",
+            "version": 1,
+            "digest": "RxCttY6vVKQhyZw4/TXfihdFaLikz/vzpPpSdru54e0=",
+            "type": "0x2::coin::Coin<0x2::sui::SUI>",
+            "owner": {
+                "AddressOwner": "0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"
+            },
+            "previousTransaction": "oZze1GxIHo97+Cx8NiIjUiQE6B7oGrDXV9BN7mE3n8k="
+        }
+    ],
+    "id": 1
+}
 ```
 
 Here we formatted the output a bit, the initial one is quite hard to read. From now on we will save the output to a temporary JSON file to get it formatted and readable.
@@ -88,13 +104,126 @@ We the big output we can reach several conclusions. We can see that each object 
 
 ## 2nd Example, check the details of an Object
 
-Now let's check the `objectId` for one of the previously returned coins and check more details about it using the `sui_getObject` method.
+Now let's check the <a href="https://docs.sui.io/sui-jsonrpc#sui_getObject">`objectId`</a> for one of the previously returned coins and check more details about it using the `sui_getObject` method.
 
-```bash
+```sh
 # set the id as a variable
-id="0x11aee1d5736683a2285251306b83068983119d96"
+id="0x01fdc6369b1a351114ae208a5f76cd8a974f528e"
 # create the JSON
-data="{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"sui_getObject\", \"params\": ["$id"]}"
+data="{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"sui_getObject\", \"params\": [\"$id\"]}"
 # fire the request and save the result in a tmp file
-curl -X POST -H 'Content-type: application/json' --data-raw "$data" $rpc > tmp.json
+curl -X POST -H 'Content-type: application/json' --data-raw "$data" $rpc > result.json
+```
+
+And here is the response when we open the file:
+```JSON
+{
+    "jsonrpc":"2.0",
+    "result":{
+        "status":"Exists",
+        "details":{
+            "data":{
+                "dataType":"moveObject",
+                "type":"0x2::coin::Coin<0x2::sui::SUI>",
+                "has_public_transfer":true,
+                "fields":{
+                    "balance":10000000,
+                    "id":{"id":"0x01fdc6369b1a351114ae208a5f76cd8a974f528e"}
+                    }
+                },
+        "owner":{"AddressOwner":"0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"},
+        "previousTransaction":"8Dpc1+03kCviQRrB4hMUDT1z3bF+ZhlHtkG3RXHKuBg=",
+        "storageRebate":15,
+        "reference":{"objectId":"0x01fdc6369b1a351114ae208a5f76cd8a974f528e",
+        "version":1,
+         "digest":"Bu5RPYiVWDDX4IshFqB8vsUdzBptTkhNK/Hm/b06wEA="}}
+    },
+    "id":1
+}
+```
+
+As expected the standard fields are there `digest, previousTransaction, owner, version`, and some new fields, the important ones being inside `result`.
+The `type` field is there, unsurprisingly, same as before, in the `fields` field we see `"balance": 10000000` which means that his SUI Coin object's value is 10.000.000 SUI's. The faucet provided us with 5 such objects and you can check each one of them to see their balance is the same.
+
+As we mentioned, when you want to acquire another object that is priced in SUI, then you need to send a Coin Object with the exact balance as its price, plus we need to provide a Coin Object from where gas will be subtracted.
+
+Let's see how can we prepare this manually.
+
+## 3rd Example, split a SUI Coin object
+
+We will use the <a href="https://docs.sui.io/sui-jsonrpc#sui_splitCoin">`sui_splitCoin`</a> method to split our Coin object into 9999 SUI and 990001 SUI, two objects. This is a transaction, as such it will require some gas to be offered. In this instance we will use another Coin Object (and we will be using this object consistently for this purpose), let's pick the one with id `0x8852e991c9e3e9a07b3834621e4f938dad4ea57b`. 
+
+Binding this id to a variable:
+
+```console
+example@mystenlabs:~$ gas_id="0x8852e991c9e3e9a07b3834621e4f938dad4ea57b"
+```
+
+For now we will ignore the `gas_budget` field by setting a large budget that ensures our transaction will go through. Soon we will see how we can check the gas price reference so we can fine tune our transactions.
+
+The params for the request are `signer, coin_object_id, split_amounts, gas, gas_budget`. `gas` means the Coin object to subtract gas from.
+This is our data part of the curl request:
+
+```sh
+data="{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"sui_splitCoin\", \"params\": [\"$address\", \"$id\", [9999], \"$gas_id\", 100000]}"
+```
+The call
+```sh
+curl -X POST -H 'Content-type: application/json' --data-raw "$data" $rpc > result.json
+```
+
+And the result:
+
+```JSON
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "txBytes": "VHJhbnNhY3Rpb25EYXRhOjoAAgAAAAAAAAAAAAAAAAAAAAAAAAACAQAAAAAAAAAg61Q+9Nb1tpyLqvfx3DAp0d2s+c64rNfj1WaiqXiqd08DcGF5CXNwbGl0X3ZlYwEHAAAAAAAAAAAAAAAAAAAAAAAAAAIDc3VpA1NVSQACAQAB/cY2mxo1ERSuIIpfds2Kl09SjgEAAAAAAAAAIA0DJsUEUW/8hOp6PbyOLACyrrE/LuoevNMJGvrJDQ4HABECDycAAAAAAAAxGw8AAAAAAPwIv478w9s2IYqaMV/2x6C/DT0SiFLpkcnj6aB7ODRiHk+Tja1OpXsBAAAAAAAAACBHEK21jq9UpCHJnDj9Nd+KF0VouKTP+/Ok+lJ2u7nh7QEAAAAAAAAAoIYBAAAAAAA=",
+        "gas": {
+            "objectId": "0x8852e991c9e3e9a07b3834621e4f938dad4ea57b",
+            "version": 1,
+            "digest": "RxCttY6vVKQhyZw4/TXfihdFaLikz/vzpPpSdru54e0="
+        },
+        "inputObjects": [
+            {
+                "ImmOrOwnedMoveObject": {
+                    "objectId": "0x01fdc6369b1a351114ae208a5f76cd8a974f528e",
+                    "version": 1,
+                    "digest": "DQMmxQRRb/yE6no9vI4sALKusT8u6h680wka+skNDgc="
+                }
+            },
+            {
+                "MovePackage": "0x0000000000000000000000000000000000000002"
+            },
+            {
+                "ImmOrOwnedMoveObject": {
+                    "objectId": "0x8852e991c9e3e9a07b3834621e4f938dad4ea57b",
+                    "version": 1,
+                    "digest": "RxCttY6vVKQhyZw4/TXfihdFaLikz/vzpPpSdru54e0="
+                }
+            }
+        ]
+    },
+    "id": 1
+}
+```
+This response is a bit weird. The main point here is that our request is just a request to get the transaction bytes which the virtual machine understands and can execute.This means our initial intent to split the Coin object has not been realized yet, we just got the tx_bytes which we will supply to the `sui_executeTransaction` method, the one that will actually do the job. This is the standard procedure when using directly the RPC for any type of transaction that mutates objects (not a get request)
+
+If we check the params for the `sui_executeTransaction` we see some new params: `sig_scheme, signature, pub_key`.
+To get these we need to use the `sui keytool` from the sui CLI, the command is `sui keytool sign --address <owner_addres> --data <tx_bytes>`.
+
+```sh
+# for clarity bind the transactions bytes to a variable
+tx_bytes="VHJhbnNhY3Rpb25EYXRhOjoAAgAAAAAAAAAAAAAAAAAAAAAAAAACAQAAAAAAAAAg61Q+9Nb1tpyLqvfx3DAp0d2s+c64rNfj1WaiqXiqd08DcGF5CXNwbGl0X3ZlYwEHAAAAAAAAAAAAAAAAAAAAAAAAAAIDc3VpA1NVSQACAQAB/cY2mxo1ERSuIIpfds2Kl09SjgEAAAAAAAAAIA0DJsUEUW/8hOp6PbyOLACyrrE/LuoevNMJGvrJDQ4HAAkBDycAAAAAAAD8CL+O/MPbNiGKmjFf9segvw09EohS6ZHJ4+mgezg0Yh5Pk42tTqV7AQAAAAAAAAAgRxCttY6vVKQhyZw4/TXfihdFaLikz/vzpPpSdru54e0BAAAAAAAAAKCGAQAAAAAA"
+
+sui keytool sign --address "$address" --data "$txbytes"
+# INFO sui::keytool: Address : 0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12
+# INFO sui::keytool: Flag Base64: AA==
+# INFO sui::keytool: Public Key Base64: R904IKMQHbULGI+8g3aKNndZHcXbO3FSRoZF3QspcnY=
+# INFO sui::keytool: Signature : NN73LLJad0zTuCspcxInYmXV5ZTZQ9320e6NR8iyxepZ2hlsnYURbHmH0ytbukedwN5gLtp8ne8ur3myLsC4Cg==
+```
+Now we have all the necessary params' values to execute a transaction:
+
+```sh
+
 ```
