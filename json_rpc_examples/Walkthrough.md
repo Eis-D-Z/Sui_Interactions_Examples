@@ -44,54 +44,54 @@ The JSON response should look like:
     "jsonrpc": "2.0",
     "result": [
         {
-            "objectId": "0x01fdc6369b1a351114ae208a5f76cd8a974f528e",
+            "objectId": "0x91be7b2c011125f748c308872d00c8f200cabe15",
             "version": 1,
-            "digest": "DQMmxQRRb/yE6no9vI4sALKusT8u6h680wka+skNDgc=",
+            "digest": "Zusbw800Wk4+vpkei8JQD+EJiQEf8PvmdIQokHwX0N0=",
             "type": "0x2::coin::Coin<0x2::sui::SUI>",
             "owner": {
                 "AddressOwner": "0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"
             },
-            "previousTransaction": "OwkO+cDnneBjAK0dwMsRWJG729aB/1dxLJPjkEA+El8="
+            "previousTransaction": "B2015vW4kYmFXLsBw/njGWUOQHdmszg8jsdygrUFTPw="
         },
         {
-            "objectId": "0x1e25818441ac850364e890a162d8b0296a393e65",
+            "objectId": "0x9f0afe6a6c3d72d281003b6f87ea84703113744c",
             "version": 1,
-            "digest": "DLXUtRmL9edZLmNIW0PX1wVLWQjFGDRmhCt3YW0hMUk=",
+            "digest": "m0M5XSe4MLQWsz1mAPFAH8iztx8VHnZPNqYtCb4fc1k=",
             "type": "0x2::coin::Coin<0x2::sui::SUI>",
             "owner": {
                 "AddressOwner": "0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"
             },
-            "previousTransaction": "6NsFi/c0OPMIl/1BXBdKb8wp5C6wYeerPP8ksJ0o5IY="
+            "previousTransaction": "3DEKooZaVHWiMrdjMb8e1h2kx2J+M9Yu5uJy2CHmgJ4="
         },
         {
-            "objectId": "0x4ccaa3d6a09dee91e0dad55b9718625fd62364bc",
+            "objectId": "0xb2a2f77bbddb5c9c84a2abbfdd282d609274f96b",
             "version": 1,
-            "digest": "BhjmF7C3EUhnOVZzX0fxqoWsUtLvIN6Jf/4rlL4ssFA=",
+            "digest": "w3U7ZJsnpcLB+NPiFTGrOz58I/a9TRz0YPGFRPdjm6o=",
             "type": "0x2::coin::Coin<0x2::sui::SUI>",
             "owner": {
                 "AddressOwner": "0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"
             },
-            "previousTransaction": "sjkMRqVaZbQVjiGgsNA9KuQ/j6DmdDOdrop/tCaBalw="
+            "previousTransaction": "E5CGmStqkRq7fB6MPwLx5MBbR8MNtzFEiNVRnfNL3s8="
         },
         {
-            "objectId": "0x536b27e0dd74113f76ed441277ed73341266c5a5",
+            "objectId": "0xbb2d9b82ecc54012640d3cef122de4f394f8aa15",
             "version": 1,
-            "digest": "wZKmsL5y1gJZYosjwgqxlbcMVQl2fTR+b8zU6ICpChk=",
+            "digest": "dvRriMle+XIC9WHN0nEj+KD5rPWhLYBeXeFLAeCDSu8=",
             "type": "0x2::coin::Coin<0x2::sui::SUI>",
             "owner": {
                 "AddressOwner": "0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"
             },
-            "previousTransaction": "VFbdF6O/I9yQqlzwEBwj7ZIFGwb0kpwAUcHtk3iA5g0="
+            "previousTransaction": "bKioOVWJBniAlT1SlVUsspIiDDZABS+nvROSu3/RZmA="
         },
         {
-            "objectId": "0x8852e991c9e3e9a07b3834621e4f938dad4ea57b",
+            "objectId": "0xe9c85a7f49c0d0652685690dbd552fe17a83bd2e",
             "version": 1,
-            "digest": "RxCttY6vVKQhyZw4/TXfihdFaLikz/vzpPpSdru54e0=",
+            "digest": "BptpMcUxbtjN0D9CGvtqSwS9odmEfW9pho+aIF/MiA4=",
             "type": "0x2::coin::Coin<0x2::sui::SUI>",
             "owner": {
                 "AddressOwner": "0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"
             },
-            "previousTransaction": "oZze1GxIHo97+Cx8NiIjUiQE6B7oGrDXV9BN7mE3n8k="
+            "previousTransaction": "lBnZ6OXExGfd0C5EzCLlR2gXAT/aTn0EnOvwF5KJEOU="
         }
     ],
     "id": 1
@@ -108,7 +108,7 @@ Now let's check the <a href="https://docs.sui.io/sui-jsonrpc#sui_getObject">`obj
 
 ```sh
 # set the id as a variable
-id="0x01fdc6369b1a351114ae208a5f76cd8a974f528e"
+id="0x91be7b2c011125f748c308872d00c8f200cabe15"
 # create the JSON
 data="{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"sui_getObject\", \"params\": [\"$id\"]}"
 # fire the request and save the result in a tmp file
@@ -128,13 +128,13 @@ And here is the response when we open the file:
                 "has_public_transfer":true,
                 "fields":{
                     "balance":10000000,
-                    "id":{"id":"0x01fdc6369b1a351114ae208a5f76cd8a974f528e"}
+                    "id":{"id":"0x91be7b2c011125f748c308872d00c8f200cabe15"}
                     }
                 },
         "owner":{"AddressOwner":"0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"},
         "previousTransaction":"8Dpc1+03kCviQRrB4hMUDT1z3bF+ZhlHtkG3RXHKuBg=",
         "storageRebate":15,
-        "reference":{"objectId":"0x01fdc6369b1a351114ae208a5f76cd8a974f528e",
+        "reference":{"objectId":"0x91be7b2c011125f748c308872d00c8f200cabe15",
         "version":1,
          "digest":"Bu5RPYiVWDDX4IshFqB8vsUdzBptTkhNK/Hm/b06wEA="}}
     },
@@ -151,12 +151,12 @@ Let's see how can we prepare this manually.
 
 ## 3rd Example, split a SUI Coin object
 
-We will use the <a href="https://docs.sui.io/sui-jsonrpc#sui_splitCoin">`sui_splitCoin`</a> method to split our Coin object into 9999 SUI and 990001 SUI, two objects. This is a transaction, as such it will require some gas to be offered. In this instance we will use another Coin Object (and we will be using this object consistently for this purpose), let's pick the one with id `0x8852e991c9e3e9a07b3834621e4f938dad4ea57b`. 
+We will use the <a href="https://docs.sui.io/sui-jsonrpc#sui_splitCoin">`sui_splitCoin`</a> method to split our Coin object into 9999 SUI and 990001 SUI, two objects. This is a transaction, as such it will require some gas to be offered. In this instance we will use another Coin Object (and we will be using this object consistently for this purpose), let's pick the one with id `0xe9c85a7f49c0d0652685690dbd552fe17a83bd2e`. 
 
 Binding this id to a variable:
 
 ```sh
-gas_id="0x8852e991c9e3e9a07b3834621e4f938dad4ea57b"
+gas_id="0xe9c85a7f49c0d0652685690dbd552fe17a83bd2e"
 ```
 
 For now we will ignore the `gas_budget` field by setting a large budget that ensures our transaction will go through. Soon we will see how we can check the gas price reference so we can fine tune our transactions.
@@ -178,18 +178,18 @@ And the result:
 {
     "jsonrpc": "2.0",
     "result": {
-        "txBytes": "VHJhbnNhY3Rpb25EYXRhOjoAAgAAAAAAAAAAAAAAAAAAAAAAAAACAQAAAAAAAAAg61Q+9Nb1tpyLqvfx3DAp0d2s+c64rNfj1WaiqXiqd08DcGF5CXNwbGl0X3ZlYwEHAAAAAAAAAAAAAAAAAAAAAAAAAAIDc3VpA1NVSQACAQAB/cY2mxo1ERSuIIpfds2Kl09SjgEAAAAAAAAAIA0DJsUEUW/8hOp6PbyOLACyrrE/LuoevNMJGvrJDQ4HAAkBDycAAAAAAAD8CL+O/MPbNiGKmjFf9segvw09EohS6ZHJ4+mgezg0Yh5Pk42tTqV7AQAAAAAAAAAgRxCttY6vVKQhyZw4/TXfihdFaLikz/vzpPpSdru54e0BAAAAAAAAAKCGAQAAAAAA",
+        "txBytes": "VHJhbnNhY3Rpb25EYXRhOjoAAgAAAAAAAAAAAAAAAAAAAAAAAAACAQAAAAAAAAAg61Q+9Nb1tpyLqvfx3DAp0d2s+c64rNfj1WaiqXiqd08DcGF5CXNwbGl0X3ZlYwEHAAAAAAAAAAAAAAAAAAAAAAAAAAIDc3VpA1NVSQACAQCRvnssAREl90jDCIctAMjyAMq+FQEAAAAAAAAAIGbrG8PNNFpOPr6ZHovCUA/hCYkBH/D75nSEKJB8F9DdAAkBDycAAAAAAAD8CL+O/MPbNiGKmjFf9segvw09EunIWn9JwNBlJoVpDb1VL+F6g70uAQAAAAAAAAAgBptpMcUxbtjN0D9CGvtqSwS9odmEfW9pho+aIF/MiA4BAAAAAAAAAKCGAQAAAAAA",
         "gas": {
-            "objectId": "0x8852e991c9e3e9a07b3834621e4f938dad4ea57b",
+            "objectId": "0xe9c85a7f49c0d0652685690dbd552fe17a83bd2e",
             "version": 1,
-            "digest": "RxCttY6vVKQhyZw4/TXfihdFaLikz/vzpPpSdru54e0="
+            "digest": "BptpMcUxbtjN0D9CGvtqSwS9odmEfW9pho+aIF/MiA4="
         },
         "inputObjects": [
             {
                 "ImmOrOwnedMoveObject": {
-                    "objectId": "0x01fdc6369b1a351114ae208a5f76cd8a974f528e",
+                    "objectId": "0x91be7b2c011125f748c308872d00c8f200cabe15",
                     "version": 1,
-                    "digest": "DQMmxQRRb/yE6no9vI4sALKusT8u6h680wka+skNDgc="
+                    "digest": "Zusbw800Wk4+vpkei8JQD+EJiQEf8PvmdIQokHwX0N0="
                 }
             },
             {
@@ -197,9 +197,9 @@ And the result:
             },
             {
                 "ImmOrOwnedMoveObject": {
-                    "objectId": "0x8852e991c9e3e9a07b3834621e4f938dad4ea57b",
+                    "objectId": "0xe9c85a7f49c0d0652685690dbd552fe17a83bd2e",
                     "version": 1,
-                    "digest": "RxCttY6vVKQhyZw4/TXfihdFaLikz/vzpPpSdru54e0="
+                    "digest": "BptpMcUxbtjN0D9CGvtqSwS9odmEfW9pho+aIF/MiA4="
                 }
             }
         ]
@@ -214,13 +214,13 @@ To get these we need to use the `sui keytool` from the sui CLI, the command is `
 
 ```sh
 # for clarity bind the transactions bytes to a variable
-tx_bytes="VHJhbnNhY3Rpb25EYXRhOjoAAgAAAAAAAAAAAAAAAAAAAAAAAAACAQAAAAAAAAAg61Q+9Nb1tpyLqvfx3DAp0d2s+c64rNfj1WaiqXiqd08DcGF5CXNwbGl0X3ZlYwEHAAAAAAAAAAAAAAAAAAAAAAAAAAIDc3VpA1NVSQACAQAB/cY2mxo1ERSuIIpfds2Kl09SjgEAAAAAAAAAIA0DJsUEUW/8hOp6PbyOLACyrrE/LuoevNMJGvrJDQ4HAAkBDycAAAAAAAD8CL+O/MPbNiGKmjFf9segvw09EohS6ZHJ4+mgezg0Yh5Pk42tTqV7AQAAAAAAAAAgRxCttY6vVKQhyZw4/TXfihdFaLikz/vzpPpSdru54e0BAAAAAAAAAKCGAQAAAAAA"
+tx_bytes="VHJhbnNhY3Rpb25EYXRhOjoAAgAAAAAAAAAAAAAAAAAAAAAAAAACAQAAAAAAAAAg61Q+9Nb1tpyLqvfx3DAp0d2s+c64rNfj1WaiqXiqd08DcGF5CXNwbGl0X3ZlYwEHAAAAAAAAAAAAAAAAAAAAAAAAAAIDc3VpA1NVSQACAQCRvnssAREl90jDCIctAMjyAMq+FQEAAAAAAAAAIGbrG8PNNFpOPr6ZHovCUA/hCYkBH/D75nSEKJB8F9DdAAkBDycAAAAAAAD8CL+O/MPbNiGKmjFf9segvw09EunIWn9JwNBlJoVpDb1VL+F6g70uAQAAAAAAAAAgBptpMcUxbtjN0D9CGvtqSwS9odmEfW9pho+aIF/MiA4BAAAAAAAAAKCGAQAAAAAA"
 
 sui keytool sign --address "$address" --data "$tx_bytes"
 # INFO sui::keytool: Address : 0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12
 # INFO sui::keytool: Flag Base64: AA==
 # INFO sui::keytool: Public Key Base64: R904IKMQHbULGI+8g3aKNndZHcXbO3FSRoZF3QspcnY=
-# INFO sui::keytool: Signature : NN73LLJad0zTuCspcxInYmXV5ZTZQ9320e6NR8iyxepZ2hlsnYURbHmH0ytbukedwN5gLtp8ne8ur3myLsC4Cg==
+# INFO sui::keytool: Signature : 6LARTREvuT81FxtJPUI9XqoWLlNUTc3yg3yG6i3va3XhDi9WlIgu1ZXmC88VUD3fMeW5EUOh81DU8bLILXoTBw==
 ```
 The `sig_scheme` is the digital signature scheme chosen at address creation, by default is ED25519. 
 The `request_type` can be one of `ImmediateReturn, WaitForTxCert, WaitForEffectsCert, WaitForLocalExecution`, and it sets how much info we want to get back in the response. If we are in a hurry (programmatically because practically everything happens very fast) we can choose `ImmediateReturn` but in this case we will choose the last `WaitForLocalExecution` with which we'll get a complete return info. 
@@ -229,12 +229,12 @@ Now we have all the necessary params' values to execute a transaction:
 
 ```sh
 # bind first to variables
-signature="NN73LLJad0zTuCspcxInYmXV5ZTZQ9320e6NR8iyxepZ2hlsnYURbHmH0ytbukedwN5gLtp8ne8ur3myLsC4Cg=="
+signature="6LARTREvuT81FxtJPUI9XqoWLlNUTc3yg3yG6i3va3XhDi9WlIgu1ZXmC88VUD3fMeW5EUOh81DU8bLILXoTBw=="
 scheme="ED25519"
 pub_key="R904IKMQHbULGI+8g3aKNndZHcXbO3FSRoZF3QspcnY="
 
 # form the payload
-data="{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"sui_executeTransaction\", \"params\": [\"$tx_bytes\", \"$scheme\",\"$sig\",\"$pub_key\",\"WaitForLocalExecution\"]}"
+data="{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"sui_executeTransaction\", \"params\": [\"$tx_bytes\", \"$scheme\",\"$signature\",\"$pub_key\",\"WaitForLocalExecution\"]}"
 
 # fire the request
 curl -X POST -H 'Content-type: application/json' --data-raw "$data" $rpc > result.json
@@ -248,7 +248,7 @@ The response is long and verbose:
     "result": {
         "EffectsCert": {
             "certificate": {
-                "transactionDigest": "rdxfHaL2B5Y9ANZR0w5s+AhZt0iAbSGfG/roVrXJX4w=",
+                "transactionDigest": "PEGLG0dsS+4qPX6Qu77l2HauyB3eKsTfZoLExPp0GfU=",
                 "data": {
                     "transactions": [
                         {
@@ -264,7 +264,7 @@ The response is long and verbose:
                                     "0x2::sui::SUI"
                                 ],
                                 "arguments": [
-                                    "0x1fdc6369b1a351114ae208a5f76cd8a974f528e",
+                                    "0x91be7b2c011125f748c308872d00c8f200cabe15",
                                     [
                                         9999
                                     ]
@@ -274,16 +274,16 @@ The response is long and verbose:
                     ],
                     "sender": "0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12",
                     "gasPayment": {
-                        "objectId": "0x8852e991c9e3e9a07b3834621e4f938dad4ea57b",
+                        "objectId": "0xe9c85a7f49c0d0652685690dbd552fe17a83bd2e",
                         "version": 1,
-                        "digest": "RxCttY6vVKQhyZw4/TXfihdFaLikz/vzpPpSdru54e0="
+                        "digest": "BptpMcUxbtjN0D9CGvtqSwS9odmEfW9pho+aIF/MiA4="
                     },
                     "gasBudget": 100000
                 },
-                "txSignature": "ADTe9yyyWndM07grKXMSJ2Jl1eWU2UPd9tHujUfIssXqWdoZbJ2FEWx5h9MrW7pHncDeYC7afJ3vLq95si7AuApH3TggoxAdtQsYj7yDdoo2d1kdxds7cVJGhkXdCylydg==",
+                "txSignature": "AOiwEU0RL7k/NRcbST1CPV6qFi5TVE3N8oN8huot72t14Q4vVpSILtWV5gvPFVA93zHluRFDofNQ1PGyyC16EwdH3TggoxAdtQsYj7yDdoo2d1kdxds7cVJGhkXdCylydg==",
                 "authSignInfo": {
                     "epoch": 0,
-                    "signature": "gPE4X6uYz6D9lbJzVsdoJ/ftc7ZQU7Kvo8c2IpglTEls5A9w/MBzJVTFOmYiM1x/",
+                    "signature": "kU/ZpPuirQw+UzEE2FjsAdQD70SMEYF67S0DZR2yy5Ns673/ws/RbOM8uSm3wkhQ",
                     "signers_map": [
                         58,
                         48,
@@ -303,15 +303,15 @@ The response is long and verbose:
                         0,
                         0,
                         0,
-                        1,
-                        0,
                         2,
+                        0,
+                        3,
                         0
                     ]
                 }
             },
             "effects": {
-                "transactionEffectsDigest": "Zqvz3aGHfVPOqPkdI1xnKFOM57xROLTFJiDdKBUdVhA=",
+                "transactionEffectsDigest": "asC3MKdc8nDhlkeMthWiSZdRRNOq4Gi0bZijA+Nlu3Y=",
                 "effects": {
                     "status": {
                         "status": "success"
@@ -321,16 +321,16 @@ The response is long and verbose:
                         "storageCost": 45,
                         "storageRebate": 30
                     },
-                    "transactionDigest": "rdxfHaL2B5Y9ANZR0w5s+AhZt0iAbSGfG/roVrXJX4w=",
+                    "transactionDigest": "PEGLG0dsS+4qPX6Qu77l2HauyB3eKsTfZoLExPp0GfU=",
                     "created": [
                         {
                             "owner": {
                                 "AddressOwner": "0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"
                             },
                             "reference": {
-                                "objectId": "0xeb25c93ba7b886817b7dca5a151e201b73e4e59a",
+                                "objectId": "0x0f848b589fe7727a628359c26bf880c9efb1de3b",
                                 "version": 1,
-                                "digest": "E0FC4IL0nxALmVwcepb5jzmT/Y+yYIUbdbF1RyIbBX4="
+                                "digest": "FmBwMRf+r1QlTf3XXBYizElY++W4w19tjeSLmTDpgbI="
                             }
                         }
                     ],
@@ -340,9 +340,9 @@ The response is long and verbose:
                                 "AddressOwner": "0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"
                             },
                             "reference": {
-                                "objectId": "0x01fdc6369b1a351114ae208a5f76cd8a974f528e",
+                                "objectId": "0x91be7b2c011125f748c308872d00c8f200cabe15",
                                 "version": 2,
-                                "digest": "OP3HfqR9xYidQ2O0bReOg7MDBe5cJI/un1OQScVRPSI="
+                                "digest": "fVd5rvaR2AafWKtjLO1nemS6Qqs1xnrHPk0RStbPK50="
                             }
                         },
                         {
@@ -350,9 +350,9 @@ The response is long and verbose:
                                 "AddressOwner": "0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"
                             },
                             "reference": {
-                                "objectId": "0x8852e991c9e3e9a07b3834621e4f938dad4ea57b",
+                                "objectId": "0xe9c85a7f49c0d0652685690dbd552fe17a83bd2e",
                                 "version": 2,
-                                "digest": "D7NqwSHbgS2mkBBMES2hoxBW9LxCXDBwkMQ7h4IqnVg="
+                                "digest": "w0PcNy/0pKEieoWQ/4lFx8XaomMnotSltRZMMMd4KtI="
                             }
                         }
                     ],
@@ -361,9 +361,9 @@ The response is long and verbose:
                             "AddressOwner": "0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"
                         },
                         "reference": {
-                            "objectId": "0x8852e991c9e3e9a07b3834621e4f938dad4ea57b",
+                            "objectId": "0xe9c85a7f49c0d0652685690dbd552fe17a83bd2e",
                             "version": 2,
-                            "digest": "D7NqwSHbgS2mkBBMES2hoxBW9LxCXDBwkMQ7h4IqnVg="
+                            "digest": "w0PcNy/0pKEieoWQ/4lFx8XaomMnotSltRZMMMd4KtI="
                         }
                     },
                     "events": [
@@ -375,18 +375,18 @@ The response is long and verbose:
                                 "recipient": {
                                     "AddressOwner": "0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"
                                 },
-                                "objectId": "0xeb25c93ba7b886817b7dca5a151e201b73e4e59a"
+                                "objectId": "0x0f848b589fe7727a628359c26bf880c9efb1de3b"
                             }
                         }
                     ],
                     "dependencies": [
-                        "OwkO+cDnneBjAK0dwMsRWJG729aB/1dxLJPjkEA+El8=",
-                        "oZze1GxIHo97+Cx8NiIjUiQE6B7oGrDXV9BN7mE3n8k="
+                        "B2015vW4kYmFXLsBw/njGWUOQHdmszg8jsdygrUFTPw=",
+                        "lBnZ6OXExGfd0C5EzCLlR2gXAT/aTn0EnOvwF5KJEOU="
                     ]
                 },
                 "authSignInfo": {
                     "epoch": 0,
-                    "signature": "rILEjAAFiwMkyNTbnuZZYq6wo71UIzKcIbOSI8H3NntL+djQ8Kb80lTm5iyCNjf2",
+                    "signature": "gp4NdTfonxPet2v+v2gdEmBhLs7Ii7zZ6UmSjKvuv8h7KxFtWZaMqVamk9QXiL9f",
                     "signers_map": [
                         58,
                         48,
@@ -420,7 +420,7 @@ The response is long and verbose:
 }
 ```
 
-We can see in the `effects` field that we were successful, we can see a mutated object with the id of the initial coin, its version got bumped up to 2 meaning that it has experienced two transactions and we also have a newly created object with id: `0xeb25c93ba7b886817b7dca5a151e201b73e4e59a`.
+We can see in the `effects` field that we were successful, we can see a mutated object with the id of the initial coin, its version got bumped up to 2 meaning that it has experienced two transactions and we also have a newly created object with id: `0x0f848b589fe7727a628359c26bf880c9efb1de3b==`.
 If we check it with `sui_getObject` we see:
 
 ```JSON
@@ -434,7 +434,7 @@ If we check it with `sui_getObject` we see:
                 "fields": {
                     "balance": 9999,
                     "id": {
-                        "id": "0xeb25c93ba7b886817b7dca5a151e201b73e4e59a"
+                        "id": "0x0f848b589fe7727a628359c26bf880c9efb1de3b=="
                     }
                 }
             }, // ...
@@ -444,3 +444,210 @@ If we check it with `sui_getObject` we see:
 We can confirm that we own a 9999 worth of SUI Coin object. If we check all our owned objects (example 1) we can see the other two coins that changed with balance `9990001` SUI and the other with `9999428` SUI. The latter is the one that was used to pay for the gas.
 
 We will explore the other `request_type`'s next and we will see how we can subscribe to events so we can know what's happening with our transactions.
+
+
+## 4th example Merge two coins
+
+In this example we will merge two coins to check the rebate we get. In the previous example, under `effects` we can see exactly how much gas we paid (the values should be taken with a grain of salt since the algorithms are yet to be finilized). It also included a `storage_rebate` value. This is the ammount we will get back when we delete this Object. For Coin objects the reasonable way to go about deleting them is merging them with other coins. This is the equivalent of exchanging our banknotes for larger denominations.
+We will choose our initial coin, whose address we bound to the `$id` variable and let's pick the second in row coin which is untouched.
+
+The end result should be that the second object is no more and we only have our first Coin object with a larger balance and the same id.
+
+```sh
+# bind the id of the second coin
+id2="0x9f0afe6a6c3d72d281003b6f87ea84703113744c"
+```
+
+The method is `sui_mergeCoind` and the procedure is the same, but this time the `request_type` will be `ImmediateReturn` for when we execute the transaction. We will then use the transaction digest and the `sui_getTransaction` to further see what happened to the execution. Some outputs will be ommited since we have already seen how they look like and we will focus on the new ones mainly.
+
+```sh
+# prepare data for the sui_mergeCoins method
+data="{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"sui_mergeCoins\", \"params\": [\"$address\", \"$id\", \"$id2\", \"$gas_id\", 1000]}"
+
+# fire the request
+curl -X POST -H 'Content-type: application/json' --data-raw "$data" $rpc > result.json
+
+# get the tx_bytes from the result
+tx_bytes="VHJhbnNhY3Rpb25EYXRhOjoAAgAAAAAAAAAAAAAAAAAAAAAAAAACAQAAAAAAAAAg61Q+9Nb1tpyLqvfx3DAp0d2s+c64rNfj1WaiqXiqd08DcGF5BGpvaW4BBwAAAAAAAAAAAAAAAAAAAAAAAAACA3N1aQNTVUkAAgEAkb57LAERJfdIwwiHLQDI8gDKvhUCAAAAAAAAACB9V3mu9pHYBp9Yq2Ms7Wd6ZLpCqzXGesc+TRFK1s8rnQEAnwr+amw9ctKBADtvh+qEcDETdEwBAAAAAAAAACCbQzldJ7gwtBazPWYA8UAfyLO3HxUedk82pi0Jvh9zWfwIv478w9s2IYqaMV/2x6C/DT0S6chaf0nA0GUmhWkNvVUv4XqDvS4CAAAAAAAAACDDQ9w3L/SkoSJ6hZD/iUXHxdqiYyei1KW1Fkwwx3gq0gEAAAAAAAAA6AMAAAAAAAA="
+
+# get the exectute data
+sui keytool sign --address "$address" --data "$tx_bytes"
+# INFO sui::keytool: Address : 0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12
+# INFO sui::keytool: Flag Base64: AA==
+# INFO sui::keytool: Public Key Base64: R904IKMQHbULGI+8g3aKNndZHcXbO3FSRoZF3QspcnY=
+# INFO sui::keytool: Signature : HIP5rNVmmvlCVq6nwvd2Ls7Uu9zUGyvw8T6+1N0LAmph123cX+bG2fsqyYcVpyT0imQZooSxNsac+89HsZVcCA==
+
+# the public key and the scheme are the same
+signature="HIP5rNVmmvlCVq6nwvd2Ls7Uu9zUGyvw8T6+1N0LAmph123cX+bG2fsqyYcVpyT0imQZooSxNsac+89HsZVcCA=="
+
+# prepare to execute the transaction
+data="{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"sui_executeTransaction\", \"params\": [\"$tx_bytes\", \"$scheme\",\"$signature\",\"$pub_key\",\"ImmediateReturn\"]}"
+
+# request exectution
+curl -X POST -H 'Content-type: application/json' --data-raw "$data" $rpc > result.json
+```
+We check the response:
+
+```JSON
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "ImmediateReturn": {
+            "tx_digest": "IuqUhuwnSp1LbJvWG8X9zbdl5LdiViJucAQb+KgYh2A="
+        }
+    },
+    "id": 1
+}
+```
+
+The `tx_digest` is what we need:
+
+```sh
+tx_digest="IuqUhuwnSp1LbJvWG8X9zbdl5LdiViJucAQb+KgYh2A="
+
+# prepare the data for the sui_getTransaction
+data="{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"sui_getTransaction\", \"params\": [\"$tx_digest\"}"
+
+# send the request
+curl -X POST -H 'Content-type: application/json' --data-raw "$data" $rpc > result.json
+```
+
+Thus we can see the outcome of our execution:
+
+```JSON
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "certificate": {
+            "transactionDigest": "IuqUhuwnSp1LbJvWG8X9zbdl5LdiViJucAQb+KgYh2A=",
+            "data": {
+                "transactions": [
+                    {
+                        "Call": {
+                            "package": {
+                                "objectId": "0x0000000000000000000000000000000000000002",
+                                "version": 1,
+                                "digest": "61Q+9Nb1tpyLqvfx3DAp0d2s+c64rNfj1WaiqXiqd08="
+                            },
+                            "module": "pay",
+                            "function": "join",
+                            "typeArguments": [
+                                "0x2::sui::SUI"
+                            ],
+                            "arguments": [
+                                "0x91be7b2c011125f748c308872d00c8f200cabe15",
+                                "0x9f0afe6a6c3d72d281003b6f87ea84703113744c"
+                            ]
+                        }
+                    }
+                ],
+                "sender": "0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12",
+                "gasPayment": {
+                    "objectId": "0xe9c85a7f49c0d0652685690dbd552fe17a83bd2e",
+                    "version": 2,
+                    "digest": "w0PcNy/0pKEieoWQ/4lFx8XaomMnotSltRZMMMd4KtI="
+                },
+                "gasBudget": 1000
+            },
+            "txSignature": "AByD+azVZpr5Qlaup8L3di7O1Lvc1Bsr8PE+vtTdCwJqYddt3F/mxtn7KsmHFack9IpkGaKEsTbGnPvPR7GVXAhH3TggoxAdtQsYj7yDdoo2d1kdxds7cVJGhkXdCylydg==",
+            "authSignInfo": {
+                "epoch": 0,
+                "signature": "gkRkfIQWMESYbWtpiGLU45EbBvHTq8xufmp8TJkaYGYFunYWlGf1/6DMMisKrufm",
+                "signers_map": [
+                    58,
+                    48,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    2,
+                    0,
+                    16,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    2,
+                    0,
+                    3,
+                    0
+                ]
+            }
+        },
+        "effects": {
+            "status": {
+                "status": "success"
+            },
+            "gasUsed": {
+                "computationCost": 528,
+                "storageCost": 30,
+                "storageRebate": 45
+            },
+            "transactionDigest": "IuqUhuwnSp1LbJvWG8X9zbdl5LdiViJucAQb+KgYh2A=",
+            "mutated": [
+                {
+                    "owner": {
+                        "AddressOwner": "0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"
+                    },
+                    "reference": {
+                        "objectId": "0x91be7b2c011125f748c308872d00c8f200cabe15",
+                        "version": 3,
+                        "digest": "y3YuwQfasEHD5lamA4su5+melRJWpP3s37uNX/u7F38="
+                    }
+                },
+                {
+                    "owner": {
+                        "AddressOwner": "0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"
+                    },
+                    "reference": {
+                        "objectId": "0xe9c85a7f49c0d0652685690dbd552fe17a83bd2e",
+                        "version": 3,
+                        "digest": "zMc4fVHWOg4vVMa8l1JM4erSJKxz7I8BlluS5dWKoZE="
+                    }
+                }
+            ],
+            "deleted": [
+                {
+                    "objectId": "0x9f0afe6a6c3d72d281003b6f87ea84703113744c",
+                    "version": 2,
+                    "digest": "Y2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2M="
+                }
+            ],
+            "gasObject": {
+                "owner": {
+                    "AddressOwner": "0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"
+                },
+                "reference": {
+                    "objectId": "0xe9c85a7f49c0d0652685690dbd552fe17a83bd2e",
+                    "version": 3,
+                    "digest": "zMc4fVHWOg4vVMa8l1JM4erSJKxz7I8BlluS5dWKoZE="
+                }
+            },
+            "events": [
+                {
+                    "deleteObject": {
+                        "packageId": "0x0000000000000000000000000000000000000002",
+                        "transactionModule": "pay",
+                        "sender": "0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12",
+                        "objectId": "0x9f0afe6a6c3d72d281003b6f87ea84703113744c"
+                    }
+                }
+            ],
+            "dependencies": [
+                "PEGLG0dsS+4qPX6Qu77l2HauyB3eKsTfZoLExPp0GfU=",
+                "3DEKooZaVHWiMrdjMb8e1h2kx2J+M9Yu5uJy2CHmgJ4="
+            ]
+        },
+        "timestamp_ms": null,
+        "parsed_data": null
+    },
+    "id": 1
+}
+```
+
+The Coin object used for gas and the first Coin object have been mutated, the other Coin got deleted. We got `45` SUI as rebate and the Coin object with id `$id` now has a balance of `19990001` SUI (we can check this with `sui client gas` for ease). 
