@@ -1,6 +1,7 @@
 # Walkthrough
 
 Welcome to the JSON RPC example walkthrough. We assume you already have an empty address. We will be using curl and of course, if javascript is more comfortable, you can easilly follow the examples with it through fetch calls or axios (or something similar).
+At some point git will be needed to get some ready made code from the net.
 
 Sui will be the network and SUI will mean the token.
 
@@ -650,4 +651,131 @@ Thus we can see the outcome of our execution:
 }
 ```
 
-The Coin object used for gas and the first Coin object have been mutated, the other Coin got deleted. We got `45` SUI as rebate and the Coin object with id `$id` now has a balance of `19990001` SUI (we can check this with `sui client gas` for ease). 
+The Coin object used for gas and the first Coin object have been mutated, the other Coin got deleted. We got `45` SUI as rebate and the Coin object with id `$id` now has a balance of `19990001` SUI (we can check this with `sui client gas` for ease).
+
+## Interlude
+
+We have already seen a couple of straightforward examples. With this experience under our belt it should be pretty straightforward to experiment with other similar methods like `sui_splitCoinEqual` or `sui_getRawObject` etc... The next examples will involve publishing a move module and use it on the blockchain. Of course this assumes an existing move module, we shall use an example module, to learn more about move and how to write modules suitable for sui please check <a href="http://examples.sui.io/">this location</a>. 
+
+Let's get our move package, we will clone the whole sui repo and use the module `move_tutorial` in `sui/sui_programmability/examples`. (We clome the whole repo hoping that it will help you get started to explore and play with sui, we'll take it a step further and suggest you fork the repo in your github account first and clone your fork).
+
+```sh
+# clone the repo in the work or home directory
+git clone https://github.com/MystenLabs/sui.git
+```
+
+In order to publish a module, first it needs to be built. If we try it directly an error will pop up so proactively let's first alter the `Move.toml` file inside `sui/sui_programmability/examples/move_tutorial/`. We need to change the following line:
+
+```
+[dependencies]
+Sui = { local = "../../../crates/sui-framework" }
+```
+
+to
+
+```
+[dependencies]
+Sui = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework", rev = "devnet" }
+```
+
+Also, at the end of the `Move.toml` file add the following line:
+
+```
+sui =  "0000000000000000000000000000000000000002"
+```
+
+Now the module is ready to be built, inside the `sui/sui_programmability/examples/move_tutorial/` run:
+
+```sh
+# inside sui/sui_programmability/examples/move_tutorial/
+sui move build
+```
+
+A new `build/` directory will appear, inside it we can see  the `build/MyFirstPackage/bytecode_modules/my_module.mv` file which the one desired.
+
+Last step is to encode its contents with the tool `sui move build --dump-bytecode-as-base64`:
+
+```sh
+# inside sui/sui_programmability/examples/move_tutorial/
+sui move build --dump-bytecode-as-base64
+# ["oRzrCwUAAAAKAQAIAggQAxgpBEEEBUUsB3F9CO4BKAqWAhIMqAJyDZoDBgAAAQEBAgEDAAQIAAAFDAADBgIAAQ0EAAAHAAEAAAgCAwAACQIDAAAKBAEAAAsFAwABDgAHAAMPCAkAAgIKAQEIBwYHCwEHCAIAAQYIAQEDBQcIAAMDBQcIAgEGCAABCAABCAMBBggCAQUCCQAFAQgBCW15X21vZHVsZQZvYmplY3QIdHJhbnNmZXIKdHhfY29udGV4dAVGb3JnZQVTd29yZAlUeENvbnRleHQEaW5pdAVtYWdpYwhzdHJlbmd0aAxzd29yZF9jcmVhdGUOc3dvcmRzX2NyZWF0ZWQCaWQDVUlEA25ldwZzZW5kZXIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAICDAgDCwMBAgMMCAMIAwkDAAAAAAYLCgARBQYAAAAAAAAAABIADAELAQsALhEGOAACAQEAAAEECwAQABQCAgEAAAEECwAQARQCAwEEAAsSCwQRBQsBCwISAQwFCwULAzgBCgAQAhQGAQAAAAAAAAAWCwAPAhUCBAEAAAEECwAQAhQCAQEBAgABAA=="]
+```
+
+
+## 5th Example, Publish a package
+
+The method is `sui_publish` and the params are pretty straightforward `sender_address, compiled_modules, gas_object, gas_budget`. The `compiled_modules` will containe the base64 mouthful we got above.
+
+```sh
+# bind the base64 output without the []
+module_base64="oRzrCwUAAAAKAQAIAggQAxgpBEEEBUUsB3F9CO4BKAqWAhIMqAJyDZoDBgAAAQEBAgEDAAQIAAAFDAADBgIAAQ0EAAAHAAEAAAgCAwAACQIDAAAKBAEAAAsFAwABDgAHAAMPCAkAAgIKAQEIBwYHCwEHCAIAAQYIAQEDBQcIAAMDBQcIAgEGCAABCAABCAMBBggCAQUCCQAFAQgBCW15X21vZHVsZQZvYmplY3QIdHJhbnNmZXIKdHhfY29udGV4dAVGb3JnZQVTd29yZAlUeENvbnRleHQEaW5pdAVtYWdpYwhzdHJlbmd0aAxzd29yZF9jcmVhdGUOc3dvcmRzX2NyZWF0ZWQCaWQDVUlEA25ldwZzZW5kZXIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAICDAgDCwMBAgMMCAMIAwkDAAAAAAYLCgARBQYAAAAAAAAAABIADAELAQsALhEGOAACAQEAAAEECwAQABQCAgEAAAEECwAQARQCAwEEAAsSCwQRBQsBCwISAQwFCwULAzgBCgAQAhQGAQAAAAAAAAAWCwAPAhUCBAEAAAEECwAQAhQCAQEBAgABAA=="
+
+# prepare the data
+data="{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"sui_publish\", \"params\": [\"$address\", [\"$module_base64\"], \"$gas_id\", 10000]}"
+
+# fire the request
+curl -X POST -H 'Content-type: application/json' --data-raw "$data" $rpc > result.json
+```
+
+We get the tx_bytes in the response:
+
+```JSON
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "txBytes": "VHJhbnNhY3Rpb25EYXRhOjoAAQHMA6Ec6wsFAAAACgEACAIIEAMYKQRBBAVFLAdxfQjuASgKlgISDKgCcg2aAwYAAAEBAQIBAwAECAAABQwAAwYCAAENBAAABwABAAAIAgMAAAkCAwAACgQBAAALBQMAAQ4ABwADDwgJAAICCgEBCAcGBwsBBwgCAAEGCAEBAwUHCAADAwUHCAIBBggAAQgAAQgDAQYIAgEFAgkABQEIAQlteV9tb2R1bGUGb2JqZWN0CHRyYW5zZmVyCnR4X2NvbnRleHQFRm9yZ2UFU3dvcmQJVHhDb250ZXh0BGluaXQFbWFnaWMIc3RyZW5ndGgMc3dvcmRfY3JlYXRlDnN3b3Jkc19jcmVhdGVkAmlkA1VJRANuZXcGc2VuZGVyAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgACAgwIAwsDAQIDDAgDCAMJAwAAAAAGCwoAEQUGAAAAAAAAAAASAAwBCwELAC4RBjgAAgEBAAABBAsAEAAUAgIBAAABBAsAEAEUAgMBBAALEgsEEQULAQsCEgEMBQsFCwM4AQoAEAIUBgEAAAAAAAAAFgsADwIVAgQBAAABBAsAEAIUAgEBAQIAAQD8CL+O/MPbNiGKmjFf9segvw09EunIWn9JwNBlJoVpDb1VL+F6g70uAwAAAAAAAAAgzMc4fVHWOg4vVMa8l1JM4erSJKxz7I8BlluS5dWKoZEBAAAAAAAAABAnAAAAAAAA"
+        //...
+    } 
+    //...
+}
+```
+Now to execute the transaction:
+
+```sh
+# usual binding
+tx_bytes="VHJhbnNhY3Rpb25EYXRhOjoAAQHMA6Ec6wsFAAAACgEACAIIEAMYKQRBBAVFLAdxfQjuASgKlgISDKgCcg2aAwYAAAEBAQIBAwAECAAABQwAAwYCAAENBAAABwABAAAIAgMAAAkCAwAACgQBAAALBQMAAQ4ABwADDwgJAAICCgEBCAcGBwsBBwgCAAEGCAEBAwUHCAADAwUHCAIBBggAAQgAAQgDAQYIAgEFAgkABQEIAQlteV9tb2R1bGUGb2JqZWN0CHRyYW5zZmVyCnR4X2NvbnRleHQFRm9yZ2UFU3dvcmQJVHhDb250ZXh0BGluaXQFbWFnaWMIc3RyZW5ndGgMc3dvcmRfY3JlYXRlDnN3b3Jkc19jcmVhdGVkAmlkA1VJRANuZXcGc2VuZGVyAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgACAgwIAwsDAQIDDAgDCAMJAwAAAAAGCwoAEQUGAAAAAAAAAAASAAwBCwELAC4RBjgAAgEBAAABBAsAEAAUAgIBAAABBAsAEAEUAgMBBAALEgsEEQULAQsCEgEMBQsFCwM4AQoAEAIUBgEAAAAAAAAAFgsADwIVAgQBAAABBAsAEAIUAgEBAQIAAQD8CL+O/MPbNiGKmjFf9segvw09EunIWn9JwNBlJoVpDb1VL+F6g70uAwAAAAAAAAAgzMc4fVHWOg4vVMa8l1JM4erSJKxz7I8BlluS5dWKoZEBAAAAAAAAABAnAAAAAAAA"
+
+# get the signature
+sui keytool sign --address "$address" --data "$tx_bytes"
+# INFO sui::keytool: Address : 0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12
+# INFO sui::keytool: Flag Base64: AA==
+# INFO sui::keytool: Public Key Base64: R904IKMQHbULGI+8g3aKNndZHcXbO3FSRoZF3QspcnY=
+# INFO sui::keytool: Signature : 73nBz+KZ3ppddt/gc4KBWePE6maYlwgpIgqozSkd4V6HkyFJt2NRy/oD82to8HnlDzzDECNgATSM2YyNDx9fBw==
+
+# more biding
+signature="73nBz+KZ3ppddt/gc4KBWePE6maYlwgpIgqozSkd4V6HkyFJt2NRy/oD82to8HnlDzzDECNgATSM2YyNDx9fBw=="
+
+# prepare data
+data="{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"sui_executeTransaction\", \"params\": [\"$tx_bytes\", \"$scheme\",\"$signature\",\"$pub_key\",\"WaitForLocalExecution\"]}"
+
+# fire
+curl -X POST -H 'Content-type: application/json' --data-raw "$data" $rpc > result.json
+```
+
+Success!:
+
+```JSON
+{
+    // ...
+    "created": [
+                {
+                    "owner": {
+                        "AddressOwner": "0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"
+                    },
+                    "reference": {
+                        "objectId": "0x15315e6b128043c63398841916c2987cfe16f04a",
+                        "version": 1,
+                        "digest": "Bp1deLh2HeD/m0CdW659evPsE8Hr/ynxQMGfFq9+Aaw="
+                    }
+                },
+                // ...
+    ]
+    // ...
+}
+```
+
+A new object has been created, if we check it we will see it is a move package, owned by us.
+
+Next let's mint some swords to raise some mayhem!
+
+## 6th Example

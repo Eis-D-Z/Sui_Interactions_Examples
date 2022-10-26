@@ -7,6 +7,7 @@ Assumptions:
 - The environment is set up and an address exists as outlined <a href="https://docs.sui.io/build/devnet">here</a>, we will use devnet but you can do the same on a local installation
 - Basic knowledge on blockchains and Sui exists, you can start learning <a href="https://docs.sui.io/devnet/learn">here</a>
 - For the Rust SDK, working knowledge of Rust exists
+- Familiarity with git and a working installation
 - Working knowledge of Sui is expected to be gained when finishing a walkthrough, initially we assume that this is your first interaction, so we will go through many concepts and explain them in as much detail as possible.
 
 ## Scope
