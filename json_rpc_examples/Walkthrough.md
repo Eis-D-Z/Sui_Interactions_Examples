@@ -763,19 +763,233 @@ Success!:
                         "AddressOwner": "0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"
                     },
                     "reference": {
-                        "objectId": "0x15315e6b128043c63398841916c2987cfe16f04a",
+                        "objectId": "0x15315e6b128043c63398841916c2987cfe16f04a", // our new Forge Object
                         "version": 1,
                         "digest": "Bp1deLh2HeD/m0CdW659evPsE8Hr/ynxQMGfFq9+Aaw="
                     }
                 },
-                // ...
+                {
+                    "owner": "Immutable",
+                    "reference": {
+                        "objectId": "0xaf6b470f5063abe2db204e5849acda29be28d14c", // our new package
+                        "version": 1,
+                        "digest": "xXms6tXr52jaiHfCeVeUmgjTqPGWGrUan8cFzHjw3NA="
+                    }
+                }
     ]
     // ...
 }
 ```
 
-A new object has been created, if we check it we will see it is a move package, owned by us.
+A new object and a new package appeared on the Sui ledger. As explained by the comments in the json above, with one glance we can tell which is the Forge object and which is the package. The package contains the functions to create swords and check them, the Forge object was created because the package's init function instructed to be so done. The init function is run only once, right after the bytecode got stored in Sui.
 
 Next let's mint some swords to raise some mayhem!
 
-## 6th Example
+## 6th Example, Mint swords
+
+We will start by checking our module on the ledger with the `sui_getNormalizedMoveModule` method. This is a get method, as we have seen these methods are gas-less. We need the module id which we can get from the above result and the module name, `"my_module"` in this case.
+
+```sh
+module_id="0xaf6b470f5063abe2db204e5849acda29be28d14c"
+module_name="my_module"
+
+data="{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"sui_getNormalizedMoveModule\", \"params\": [\"$module_id\",\"$module_name\"]}"
+
+curl -X POST -H 'Content-type: application/json' --data-raw "$data" $rpc > result.json
+```
+
+The result:
+
+```JSON
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "file_format_version": 5,
+        "address": "0xaf6b470f5063abe2db204e5849acda29be28d14c",
+        "name": "my_module",
+        "friends": [],
+        "structs": {
+            "Forge": {
+                "abilities": {
+                    "abilities": [
+                        "Key"
+                    ]
+                },
+                "type_parameters": [],
+                "fields": [
+                    {
+                        "name": "id",
+                        "type_": {
+                            "Struct": {
+                                "address": "0x2",
+                                "module": "object",
+                                "name": "UID",
+                                "type_arguments": []
+                            }
+                        }
+                    },
+                    {
+                        "name": "swords_created",
+                        "type_": "U64"
+                    }
+                ]
+            },
+            "Sword": {
+                "abilities": {
+                    "abilities": [
+                        "Store",
+                        "Key"
+                    ]
+                },
+                "type_parameters": [],
+                "fields": [
+                    {
+                        "name": "id",
+                        "type_": {
+                            "Struct": {
+                                "address": "0x2",
+                                "module": "object",
+                                "name": "UID",
+                                "type_arguments": []
+                            }
+                        }
+                    },
+                    {
+                        "name": "magic",
+                        "type_": "U64"
+                    },
+                    {
+                        "name": "strength",
+                        "type_": "U64"
+                    }
+                ]
+            }
+        },
+        "exposed_functions": {
+            "magic": {
+                "visibility": "Public",
+                "is_entry": false,
+                "type_parameters": [],
+                "parameters": [
+                    {
+                        "Reference": {
+                            "Struct": {
+                                "address": "0xaf6b470f5063abe2db204e5849acda29be28d14c",
+                                "module": "my_module",
+                                "name": "Sword",
+                                "type_arguments": []
+                            }
+                        }
+                    }
+                ],
+                "return_": [
+                    "U64"
+                ]
+            },
+            "strength": {
+                "visibility": "Public",
+                "is_entry": false,
+                "type_parameters": [],
+                "parameters": [
+                    {
+                        "Reference": {
+                            "Struct": {
+                                "address": "0xaf6b470f5063abe2db204e5849acda29be28d14c",
+                                "module": "my_module",
+                                "name": "Sword",
+                                "type_arguments": []
+                            }
+                        }
+                    }
+                ],
+                "return_": [
+                    "U64"
+                ]
+            },
+            "sword_create": {
+                "visibility": "Public",
+                "is_entry": true,
+                "type_parameters": [],
+                "parameters": [
+                    {
+                        "MutableReference": {
+                            "Struct": {
+                                "address": "0xaf6b470f5063abe2db204e5849acda29be28d14c",
+                                "module": "my_module",
+                                "name": "Forge",
+                                "type_arguments": []
+                            }
+                        }
+                    },
+                    "U64",
+                    "U64",
+                    "Address",
+                    {
+                        "MutableReference": {
+                            "Struct": {
+                                "address": "0x2",
+                                "module": "tx_context",
+                                "name": "TxContext",
+                                "type_arguments": []
+                            }
+                        }
+                    }
+                ],
+                "return_": []
+            },
+            "swords_created": {
+                "visibility": "Public",
+                "is_entry": false,
+                "type_parameters": [],
+                "parameters": [
+                    {
+                        "Reference": {
+                            "Struct": {
+                                "address": "0xaf6b470f5063abe2db204e5849acda29be28d14c",
+                                "module": "my_module",
+                                "name": "Forge",
+                                "type_arguments": []
+                            }
+                        }
+                    }
+                ],
+                "return_": [
+                    "U64"
+                ]
+            }
+        }
+    },
+    "id": 1
+}
+```
+
+We can get a lot of info from the result, under `structs` we see `Forge` and `Sword`, the forge creates the swords. The `exposed_functions` field has the functions we will call next like `sword_create, magic, strength`. Let's mint a magic katana with our forge and give it to ourselves, since the good things must be kept in house. The method is `sui_moveCall` and needs quite a lot of paramaters to work. Time to bind them to variables and prepare the data to have a clearer overview:
+
+```sh
+# signer is our $address
+# the package id
+package_object_id="0xaf6b470f5063abe2db204e5849acda29be28d14c"
+module="my_module"
+function="sword_create"
+# The type arguments and arguments can be found in the previous result under the sword_create function
+type_arguments="[]"
+arguments="[[\"0x15315e6b128043c63398841916c2987cfe16f04a\"], \"455\", \"999\", \"$address\"]"
+
+# dump all variables into the data object
+data="{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"sui_moveCall\", \"params\": [\"$address\", \"$package_object_id\", \"$module\", \"$function\", $type_arguments, $arguments, \"$gas_id\", 10000}"
+
+# cross fingers and fire request
+curl -X POST -H 'Content-type: application/json' --data-raw "$data" $rpc > result.json
+```
+
+The requests succeeds. Before we go forward to execute our transaction, let's take some time to recap the parameters of the request:
+
+- `package_object_id` is the address / UID of the package we published unto Sui. We can see it in the `sui_getNormalizedMoveModule` response in many places, most notably, it is the value of `address`, the 2nd key of the `result` json object.
+- `module` is the module name, this is needed because a package may containe more than one modules.
+- `function` is the name of the function we want to run
+- `type_arguments` this is being given by the function itself, when we checked the module with the `sui_getNormalizedMoveModule` we could see that under `sword_create` json object, the `type_paramaters` key has value `[]`. Guided by this here we also added an empty array.
+- `arguments`: here again we refer to the result we got from the `sui_getNormalizedMoveModule` and we see that for the `sword_create` function it has a few parameters. The JSON-Move subset of JSON requires that arrays are homogenous. This `arguments` array will contain only Strings (as is usual for most Arrays in JSON RPC requests). The first argument for the function is a `mutable reference to the Forge object`, this is encoded as `id of the object` so we just put the id of the Forge that has been created previously. `Magic` and `Strength`, as seen in the parameters field (inside the `sui_getNormalizedMoveModule` result) are both `U64` (unsigned integer 64 bits), but here we write `\"455\"` and `\"999\"` as Strings, this is because the array has to be homogenous. The sui Node will translate into proper types. The last required parameter is `TxContext`, this is a special one, we omitted it, as it should be done, it is filled in by Sui when it runs the function. This holds for any function that has `Mutable Reference TxContext` (or `&mut TxContext` in move source code).
+
+The last two arguments are the usual arguments for gas deduction.
+
+Continuing we get the `tx_bytes` and proceed to execute the transaction.
