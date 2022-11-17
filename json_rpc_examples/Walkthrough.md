@@ -657,7 +657,7 @@ The Coin object used for gas and the first Coin object have been mutated, the ot
 
 We have already seen a couple of straightforward examples. With this experience under our belt it should be pretty straightforward to experiment with other similar methods like `sui_splitCoinEqual` or `sui_getRawObject` etc... The next examples will involve publishing a move module and use it on the blockchain. Of course this assumes an existing move module, we shall use an example module, to learn more about move and how to write modules suitable for sui please check <a href="http://examples.sui.io/">this location</a>. 
 
-Let's get our move package, we will clone the whole sui repo and use the module `move_tutorial` in `sui/sui_programmability/examples`. (We clome the whole repo hoping that it will help you get started to explore and play with sui, we'll take it a step further and suggest you fork the repo in your github account first and clone your fork).
+Let's get our move package, we will clone the whole sui repo and use the module `move_tutorial` in `sui/sui_programmability/examples`. (We clone the whole repo hoping that it will help you get started to explore and play with sui, we'll take it a step further and suggest you fork the repo in your github account first and clone your fork).
 
 ```sh
 # clone the repo in the work or home directory
@@ -685,15 +685,6 @@ sui =  "0000000000000000000000000000000000000002"
 ```
 
 Now the module is ready to be built, inside the `sui/sui_programmability/examples/move_tutorial/` run:
-
-```sh
-# inside sui/sui_programmability/examples/move_tutorial/
-sui move build
-```
-
-A new `build/` directory will appear, inside it we can see  the `build/MyFirstPackage/bytecode_modules/my_module.mv` file which the one desired.
-
-Last step is to encode its contents with the tool `sui move build --dump-bytecode-as-base64`:
 
 ```sh
 # inside sui/sui_programmability/examples/move_tutorial/
@@ -763,7 +754,7 @@ Success!:
                         "AddressOwner": "0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"
                     },
                     "reference": {
-                        "objectId": "0x15315e6b128043c63398841916c2987cfe16f04a", // our new Forge Object
+                        "objectId": "0xeb8e4a532d09c596564f1c48b17f8ca4b339dbda", // our new Forge Object
                         "version": 1,
                         "digest": "Bp1deLh2HeD/m0CdW659evPsE8Hr/ynxQMGfFq9+Aaw="
                     }
@@ -771,7 +762,7 @@ Success!:
                 {
                     "owner": "Immutable",
                     "reference": {
-                        "objectId": "0xaf6b470f5063abe2db204e5849acda29be28d14c", // our new package
+                        "objectId": "0x9238689c6c14db84519686958643bf47de13e54e", // our new package
                         "version": 1,
                         "digest": "xXms6tXr52jaiHfCeVeUmgjTqPGWGrUan8cFzHjw3NA="
                     }
@@ -790,7 +781,7 @@ Next let's mint some swords to raise some mayhem!
 We will start by checking our module on the ledger with the `sui_getNormalizedMoveModule` method. This is a get method, as we have seen these methods are gas-less. We need the module id which we can get from the above result and the module name, `"my_module"` in this case.
 
 ```sh
-module_id="0xaf6b470f5063abe2db204e5849acda29be28d14c"
+module_id="0x9238689c6c14db84519686958643bf47de13e54e"
 module_name="my_module"
 
 data="{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"sui_getNormalizedMoveModule\", \"params\": [\"$module_id\",\"$module_name\"]}"
@@ -805,7 +796,7 @@ The result:
     "jsonrpc": "2.0",
     "result": {
         "file_format_version": 5,
-        "address": "0xaf6b470f5063abe2db204e5849acda29be28d14c",
+        "address": "0x9238689c6c14db84519686958643bf47de13e54e",
         "name": "my_module",
         "friends": [],
         "structs": {
@@ -874,7 +865,7 @@ The result:
                     {
                         "Reference": {
                             "Struct": {
-                                "address": "0xaf6b470f5063abe2db204e5849acda29be28d14c",
+                                "address": "0x9238689c6c14db84519686958643bf47de13e54e",
                                 "module": "my_module",
                                 "name": "Sword",
                                 "type_arguments": []
@@ -894,7 +885,7 @@ The result:
                     {
                         "Reference": {
                             "Struct": {
-                                "address": "0xaf6b470f5063abe2db204e5849acda29be28d14c",
+                                "address": "0x9238689c6c14db84519686958643bf47de13e54e",
                                 "module": "my_module",
                                 "name": "Sword",
                                 "type_arguments": []
@@ -914,7 +905,7 @@ The result:
                     {
                         "MutableReference": {
                             "Struct": {
-                                "address": "0xaf6b470f5063abe2db204e5849acda29be28d14c",
+                                "address": "0x9238689c6c14db84519686958643bf47de13e54e",
                                 "module": "my_module",
                                 "name": "Forge",
                                 "type_arguments": []
@@ -945,7 +936,7 @@ The result:
                     {
                         "Reference": {
                             "Struct": {
-                                "address": "0xaf6b470f5063abe2db204e5849acda29be28d14c",
+                                "address": "0x9238689c6c14db84519686958643bf47de13e54e",
                                 "module": "my_module",
                                 "name": "Forge",
                                 "type_arguments": []
@@ -968,15 +959,15 @@ We can get a lot of info from the result, under `structs` we see `Forge` and `Sw
 ```sh
 # signer is our $address
 # the package id
-package_object_id="0xaf6b470f5063abe2db204e5849acda29be28d14c"
+package_object_id="0x9238689c6c14db84519686958643bf47de13e54e"
 module="my_module"
 function="sword_create"
 # The type arguments and arguments can be found in the previous result under the sword_create function
 type_arguments="[]"
-arguments="[[\"0x15315e6b128043c63398841916c2987cfe16f04a\"], \"455\", \"999\", \"$address\"]"
+arguments="[\"0xeb8e4a532d09c596564f1c48b17f8ca4b339dbda\", \"455\", \"999\", \"$address\"]"
 
 # dump all variables into the data object
-data="{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"sui_moveCall\", \"params\": [\"$address\", \"$package_object_id\", \"$module\", \"$function\", $type_arguments, $arguments, \"$gas_id\", 10000}"
+data="{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"sui_moveCall\", \"params\": [\"$address\", \"$package_object_id\", \"$module\", \"$function\", $type_arguments, $arguments, \"$gas_id\", 10000]}"
 
 # cross fingers and fire request
 curl -X POST -H 'Content-type: application/json' --data-raw "$data" $rpc > result.json
@@ -993,3 +984,190 @@ The requests succeeds. Before we go forward to execute our transaction, let's ta
 The last two arguments are the usual arguments for gas deduction.
 
 Continuing we get the `tx_bytes` and proceed to execute the transaction.
+
+```sh
+# get tx bytes from previous result
+tx_bytes="VHJhbnNhY3Rpb25EYXRhOjoAApI4aJxsFNuEUZaGlYZDv0feE+VOAQAAAAAAAAAg+pryAo+gALTc0mDEz9wJ3XFmmJ4IMz131namNQmzj4MJbXlfbW9kdWxlDHN3b3JkX2NyZWF0ZQAEAQDrjkpTLQnFllZPHEixf4yksznb2gEAAAAAAAAAIIq8/a2erR0ImDILYDhh3kBL5EXVUkFo5TgCvFzOBhBqAAjHAQAAAAAAAAAI5wMAAAAAAAAAFPwIv478w9s2IYqaMV/2x6C/DT0S/Ai/jvzD2zYhipoxX/bHoL8NPRL6Ecj//u2x1EZIs53WLaU5X9U2ygIAAAAAAAAAIAM0VDf2JZIbgYIbHcUCdS/RZUWF7uxa1hVW98o9wzlcAQAAAAAAAAAQJwAAAAAAAA=="
+
+# get the signature
+sui keytool sign --address "$address" --data "$tx_bytes"
+
+signature="BXESHr1zl9p/oAegLcAwWQq/F6ljHg+a8N2+GOphlaW44GKJAvbGV6Zjs4E0Di0ZRb7O/9HrCzXY17WJU+7sDg=="
+
+data="{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"sui_executeTransaction\", \"params\": [\"$tx_bytes\", \"$scheme\",\"$signature\",\"$pub_key\",\"WaitForLocalExecution\"]}"
+
+curl -X POST -H 'Content-type: application/json' --data-raw "$data" $rpc > result.json
+```
+
+And we are met with success:
+
+```JSON
+// ...
+    "created": [
+        {
+            "owner": {
+                "AddressOwner": "0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"
+            },
+            "reference": {
+                "objectId": "0x36e8443ea817223639ef6bdd5400d2bfa1b673f2",
+                "version": 1,
+                "digest": "To13qwyuk+zgFskF5aN8LOt4w7cHEosqZ89ZO354J80="
+            }
+        }
+    ]
+//...
+```
+
+We just created a new sword with imba stats. In the next example we will see how we can send our sword to a friend or in general another address on the ledger.
+
+
+## 7th Example, Transfering an Object and Transfering Coins
+
+The last example will involve trasfering the sword we created to another address.
+The method is `sui_transferObject`.
+
+The methods are pretty straightforward and similar to `sui_splitCoin`, we do need a recepient address, this can be a friend's or a second address we own.
+
+
+```sh
+# address who will receive the stuff
+friend_address="0x788a511738ad4ab1d7f769b49076d9c7b272826c"
+
+# the id of the Sword NFT
+sword_id="0x36e8443ea817223639ef6bdd5400d2bfa1b673f2"
+
+# prepare the data params: [<signer>, <object_id>, <gas>, <gas_budget>, <recipient>]
+data="{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"sui_transferObject\", \"params\": [\"$address\", \"$sword_id\", \"$gas_id\", 10000, \"$friend_address\"]}"
+
+# send our transaction to be validated
+curl -X POST -H 'Content-type: application/json' --data-raw "$data" $rpc > result.json
+
+# get the tx_bytes
+tx_bytes="VHJhbnNhY3Rpb25EYXRhOjoAAHiKURc4rUqx1/dptJB22ceycoJsNuhEPqgXIjY572vdVADSv6G2c/IBAAAAAAAAACBOjXerDK6T7OAWyQXlo3ws63jDtwcSiypnz1k7fngnzfwIv478w9s2IYqaMV/2x6C/DT0S+hHI//7tsdRGSLOd1i2lOV/VNsoDAAAAAAAAACDh08xwMUIlEXznVO/kW9uVptN+cK351OvieMgvhlB3vgEAAAAAAAAAECcAAAAAAAA="
+
+# get the signature
+sui keytool sign --address "$address" --data "$tx_bytes"
+
+signature="LXDnYcjFQU6boMyp+ZBbeYr1dSjcwjnXu9mEtu/yDApf/edHyNzUT4xGW6umDnc7IW539qP04wihrkyjKVF1CA=="
+pub_key="R904IKMQHbULGI+8g3aKNndZHcXbO3FSRoZF3QspcnY="
+scheme="ED25519"
+
+# data for the execution
+data="{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"sui_executeTransaction\", \"params\": [\"$tx_bytes\", \"$scheme\",\"$signature\",\"$pub_key\",\"WaitForLocalExecution\"]}"
+
+# execute
+curl -X POST -H 'Content-type: application/json' --data-raw "$data" $rpc > result.json
+```
+
+The result confirms our success:
+
+```JSON
+//...
+"mutated": [
+    {
+        "owner": {
+            "AddressOwner": "0x788a511738ad4ab1d7f769b49076d9c7b272826c"
+        },
+        "reference": {
+            "objectId": "0x36e8443ea817223639ef6bdd5400d2bfa1b673f2",
+            "version": 2,
+            "digest": "oNqMlWH+Eslz+7ZLVtEKddWw1UlPmPj0tQAwWRoRzYg="
+        }
+    }, //...
+]
+//...
+```
+
+The `AddressOwner` is our `$friend_address` for the sword (`object_id` same as `$sword_id`). Also the sword's version got bumped up to 2, meaning it has experienced two transactions. We can confirm that is correct, first transaction being its forging (actually it is the transfer to our address after it is created, if you check the source code for the <a href="https://github.com/MystenLabs/sui/blob/main/sui_programmability/examples/move_tutorial/sources/my_module.move">`sword_create`</a> function.), and the second transaction being this one just now.
+
+
+## Example use sui_paySui to split or merge coins
+
+SUI coins have a single method to operate on them. The name of the method is `sui_paySui`, its main function can be extrapolated from its name. With this method, beside sending SUI to another address we can also merge or split coins. The method's inputs are :
+- `signer`,  our address
+- `input_coins` a list/array of SUI Coin objects id's (in case we want to merge we need two at least, if we want to split a coin, we need it's id only)
+- `recipients` a list with addresses to receive the ammounts described next, in case of a split or merge the recipient is the same as the signer
+- `ammounts` a list with the new coins that will result after the method executed, the recipients above should match this list.
+- `gas_budget`, the max ammount of MIST we are willing to offer for the transaction
+
+### Split Coin Scenario
+
+Lets assume we want a 9.999 SUI Coin object, and we have a 10.000.000 SUI Coin.
+
+```sh
+signer="0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"
+input_coins="[\"0x7fb7e3a108d8f1d6022388ff81aadb295face54a\"]"
+amounts="[9999]" # It feels easier to set the ammounts first and then the recipients
+recipients="[\"0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12\"]"
+
+# compose the requests' data
+data="{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"sui_paySui\", \"params\": [\"$signer\", $input_coins, $recipients, $amounts, 10000]}"
+
+# fire the request for validation
+curl -X POST -H 'Content-type: application/json' --data-raw "$data" $rpc > result.json
+
+# get the tx bytes from the result
+tx_bytes="VHJhbnNhY3Rpb25EYXRhOjoABQF/t+OhCNjx1gIjiP+BqtspX6zlSgEAAAAAAAAAIKGJqEWh2HzAzTZsr7NSgFKYmRyWMCFac9bqIpsE8ec/AfwIv478w9s2IYqaMV/2x6C/DT0SAQ8nAAAAAAAA/Ai/jvzD2zYhipoxX/bHoL8NPRJ/t+OhCNjx1gIjiP+BqtspX6zlSgEAAAAAAAAAIKGJqEWh2HzAzTZsr7NSgFKYmRyWMCFac9bqIpsE8ec/AQAAAAAAAAAQJwAAAAAAAA=="
+
+# get the signature with the keytool
+sui keytool sign --address "$signer" --data "$tx_bytes"
+# INFO sui::keytool: Address : 0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12
+# INFO sui::keytool: Flag Base64: AA==
+# INFO sui::keytool: Public Key Base64: R904IKMQHbULGI+8g3aKNndZHcXbO3FSRoZF3QspcnY=
+# INFO sui::keytool: Signature : csAW+59KUdeKACzfxhrcJcYqc7ZHKlKZSrwv6zzOLamqm3WHfIlRqNF1Vsyf/HJX8/qvHBRdn9r+CYkB96ZrAA==
+
+scheme="ED25519" # this was chosen when first creating the address 
+pub_key="R904IKMQHbULGI+8g3aKNndZHcXbO3FSRoZF3QspcnY="
+signature="csAW+59KUdeKACzfxhrcJcYqc7ZHKlKZSrwv6zzOLamqm3WHfIlRqNF1Vsyf/HJX8/qvHBRdn9r+CYkB96ZrAA=="
+
+data="{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"sui_executeTransaction\", \"params\": [\"$tx_bytes\", \"$scheme\",\"$signature\",\"$pub_key\",\"WaitForLocalExecution\"]}"
+
+# call to execute our coin split
+curl -X POST -H 'Content-type: application/json' --data-raw "$data" $rpc > result.json
+```
+
+And we can check either through another rpc call or the sui CLI the result:
+```sh
+sui client gas
+#                 Object ID                  |  Gas Value 
+# ----------------------------------------------------------------------
+# 0x2f411abcdfa356539adaec168bc4f299d4971a38 |    9999 
+# ...
+```
+
+### Merge Coins Scenario
+
+Let's merge three coins, our address has two 10.000.000 coins and one from the previous example with ~9.998k 
+The way the method works is that it adds up all the input coins into one coin and then use that coin to send the ammounts to the recipients.
+We will leave the amounts empty so the method will just do the merging it always does and exit. This will leave us with a coin with all the previous balances added minus the gas.
+
+```sh
+# bind the SUI Coin addresses
+coin1="0xd894d43748a3caebb075ec33bd67aa463000414e"
+coin2="0xb3826bf1eab4e4a05c98600fb4f243adf6ed6564"
+coin3="0x7fb7e3a108d8f1d6022388ff81aadb295face54a"
+
+signer="0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"
+input_coins="[\"$coin1\", \"$coin2\", \"$coin3\"]"
+recipient=$signer
+
+data="{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"sui_payAllSui\", \"params\": [\"$signer\", $input_coins, \"$recipient\", 10000]}"
+
+    curl -X POST -H 'Content-type: application/json' --data-raw "$data" $rpc > result.json
+
+# get the tx bytes from the above
+tx_bytes="VHJhbnNhY3Rpb25EYXRhOjoABgPYlNQ3SKPK67B17DO9Z6pGMABBTgIAAAAAAAAAIGnAapRb+duPpIVyQC79bVso1BSmKYmsIzz7zZFc+z68s4Jr8eq05KBcmGAPtPJDrfbtZWQCAAAAAAAAACAV9s47DX+lcx0EWyRpbXkGo1MQvT5BPnUcosqU27pkjn+346EI2PHWAiOI/4Gq2ylfrOVKAwAAAAAAAAAgZECWdz/M/p2t+A3vwLO/SiW5yMxv4aAplg4wZqG2hpb8CL+O/MPbNiGKmjFf9segvw09EvwIv478w9s2IYqaMV/2x6C/DT0S2JTUN0ijyuuwdewzvWeqRjAAQU4CAAAAAAAAACBpwGqUW/nbj6SFckAu/W1bKNQUpimJrCM8+82RXPs+vAEAAAAAAAAAECcAAAAAAAA="
+
+sui keytool sign --address "$signer" --data "$tx_bytes"
+# ...
+# INFO sui::keytool: Public Key Base64: R904IKMQHbULGI+8g3aKNndZHcXbO3FSRoZF3QspcnY=
+# INFO sui::keytool: Signature : W1LFeMr1DXz8MSaMEDJ9at8ZjjN94+EeBgZKgfZ3qZ1a8zYX7ZRb2mzElsailE3qJ4tqxk2z7T5lGBuYu8w3DQ==
+
+signature="W1LFeMr1DXz8MSaMEDJ9at8ZjjN94+EeBgZKgfZ3qZ1a8zYX7ZRb2mzElsailE3qJ4tqxk2z7T5lGBuYu8w3DQ=="
+
+data="{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"sui_executeTransaction\", \"params\": [\"$tx_bytes\", \"$scheme\",\"$signature\",\"$pub_key\",\"WaitForLocalExecution\"]}"
+
+# execute
+curl -X POST -H 'Content-type: application/json' --data-raw "$data" $rpc > result.json
+```
+
