@@ -1138,7 +1138,7 @@ sui client gas
 ### Merge Coins Scenario
 
 Let's merge three coins, our address has two 10.000.000 coins and one from the previous example with ~9.998k 
-The way the method works is that it adds up all the input coins into one coin and then use that coin to send the ammounts to the recipients.
+The way the method works is that it adds up all the input coins into one coin and then use that coin to send the ammounts to the recipient.
 We will leave the amounts empty so the method will just do the merging it always does and exit. This will leave us with a coin with all the previous balances added minus the gas.
 
 ```sh

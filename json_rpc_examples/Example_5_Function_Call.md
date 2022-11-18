@@ -219,3 +219,54 @@ arguments="[\"0xeb8e4a532d09c596564f1c48b17f8ca4b339dbda\", \"455\", \"999\", \"
 data="{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"sui_moveCall\", \"params\": [\"$address\", \"$package_object_id\", \"$module\", \"$function\", $type_arguments, $arguments, \"$gas_id\", 10000]}"
 ```
 
+Some people, who read the move source code, might have noticed that the `sword_create` function takes on more argument of type `TxContext`, but we did not provide it above. This is because this argument is special, it is inputed at runtime. We make sure we wrote everything correctly and we request:
+
+```sh
+curl -X POST -H 'Content-type: application/json' --data-raw "$data" $rpc > result.json
+```
+
+Now we have the `tx_bytes` we need a signature and to execute:
+
+```sh
+# get tx bytes from previous result
+tx_bytes="VHJhbnNhY3Rpb25EYXRhOjoAApI4aJxsFNuEUZaGlYZDv0feE+VOAQAAAAAAAAAg+pryAo+gALTc0mDEz9wJ3XFmmJ4IMz131namNQmzj4MJbXlfbW9kdWxlDHN3b3JkX2NyZWF0ZQAEAQDrjkpTLQnFllZPHEixf4yksznb2gEAAAAAAAAAIIq8/a2erR0ImDILYDhh3kBL5EXVUkFo5TgCvFzOBhBqAAjHAQAAAAAAAAAI5wMAAAAAAAAAFPwIv478w9s2IYqaMV/2x6C/DT0S/Ai/jvzD2zYhipoxX/bHoL8NPRL6Ecj//u2x1EZIs53WLaU5X9U2ygIAAAAAAAAAIAM0VDf2JZIbgYIbHcUCdS/RZUWF7uxa1hVW98o9wzlcAQAAAAAAAAAQJwAAAAAAAA=="
+
+# get the signature
+sui keytool sign --address "$address" --data "$tx_bytes"
+
+signature="BXESHr1zl9p/oAegLcAwWQq/F6ljHg+a8N2+GOphlaW44GKJAvbGV6Zjs4E0Di0ZRb7O/9HrCzXY17WJU+7sDg=="
+pub_key="R904IKMQHbULGI+8g3aKNndZHcXbO3FSRoZF3QspcnY="
+# scheme is either ED25519 or Secp256k1
+scheme="ED25519"
+
+data="{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"sui_executeTransaction\", \"params\": [\"$tx_bytes\", \"$scheme\",\"$signature\",\"$pub_key\",\"WaitForLocalExecution\"]}"
+
+curl -X POST -H 'Content-type: application/json' --data-raw "$data" $rpc > result.json
+```
+
+## Result
+
+We are met with success:
+
+```JSON
+// ...
+    "created": [
+        {
+            "owner": {
+                "AddressOwner": "0xfc08bf8efcc3db36218a9a315ff6c7a0bf0d3d12"
+            },
+            "reference": {
+                "objectId": "0x36e8443ea817223639ef6bdd5400d2bfa1b673f2",
+                "version": 1,
+                "digest": "To13qwyuk+zgFskF5aN8LOt4w7cHEosqZ89ZO354J80="
+            }
+        }
+    ]
+//...
+```
+
+We just created a new sword with imba stats. By [checking the object](Example_2_Check_Object_Details.md) we can see it indeed has the 455 magic and 999 strength.
+
+## What's Next
+
+In the next [example](Example_6_Transfer_Object.md) we will transfer the sword we just created to another address.

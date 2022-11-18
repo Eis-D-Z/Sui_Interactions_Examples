@@ -91,6 +91,9 @@ sui keytool sign --address "$address" --data "$tx_bytes"
 # INFO sui::keytool: Signature : 73nBz+KZ3ppddt/gc4KBWePE6maYlwgpIgqozSkd4V6HkyFJt2NRy/oD82to8HnlDzzDECNgATSM2YyNDx9fBw==
 
 signature="73nBz+KZ3ppddt/gc4KBWePE6maYlwgpIgqozSkd4V6HkyFJt2NRy/oD82to8HnlDzzDECNgATSM2YyNDx9fBw=="
+pub_key="R904IKMQHbULGI+8g3aKNndZHcXbO3FSRoZF3QspcnY="
+# scheme is either ED25519 or Secp256k1
+scheme="ED25519"
 
 # prepare data
 data="{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"sui_executeTransaction\", \"params\": [\"$tx_bytes\", \"$scheme\",\"$signature\",\"$pub_key\",\"WaitForLocalExecution\"]}"
