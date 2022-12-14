@@ -99,7 +99,8 @@ The resulting JSON also confirms that:
             "version": 3,
             "digest": "Y2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2M="
         }
-} //...
+    ] //...
+}
 ```
 
 We can see that one object has been mutated, this is the first coin in `input_coins`, and two objects have been deleted, these are the other two coins. Their `objectId` also matches the ones we have bound to the `coin1, coin2` and `coin3` variables.
