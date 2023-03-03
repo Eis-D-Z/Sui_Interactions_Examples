@@ -1,5 +1,4 @@
 import { Ed25519Keypair, JsonRpcProvider, RawSigner } from '@mysten/sui.js';
-import * as fs from "fs";
 
 
 /*
