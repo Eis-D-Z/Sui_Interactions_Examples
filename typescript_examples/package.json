@@ -1,5 +1,7 @@
 {
   "dependencies": {
-    "@mysten/sui.js": "^0.29.1"
+    "@mysten/bcs": "^0.6.1",
+    "@mysten/sui.js": "^0.29.1",
+    "sha3": "^2.1.4"
   }
 }
