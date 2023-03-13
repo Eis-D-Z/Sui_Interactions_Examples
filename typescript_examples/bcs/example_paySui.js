@@ -1,3 +1,13 @@
+// imports
+const suijs = require("@mysten/sui.js");
+const sha3 = require("sha3");
+const bcs = require("@mysten/bcs");
+const tweetnacl = require("tweetnacl");
+
+
+/* Example of offline transaction building for paySui, this assumes you can get build the coin reference */
+
+
 // the private key, this should be kept secret at all times
 const privateKey = [
   64, 33, 18, 129, 136, 164, 29, 72, 239, 96, 52, 154, 150, 171, 75, 60, 77, 41,
@@ -59,6 +69,8 @@ const getSignature = (transactionBytes) => {
   bytesToSign.set([0, 0, 0]);
   bytesToSign.set(transactionBytes, 3);
   const signedBytes = tweetnacl.sign.detached(Uint8Array.from(bytesToSign), keypair.keypair.secretKey);
+  // here: keypair.signData(Uint8Array.from(bytesToSign)) yields the same result
+
   // signature is < flag | signedBytes | public key> where flag is 0 for ED25519 and 1 for Secp256k1
   // so its length should be 1 + 32 + whatever length the signedBytes have
   const signature = new Uint8Array(1 + signedBytes.length + 32)
