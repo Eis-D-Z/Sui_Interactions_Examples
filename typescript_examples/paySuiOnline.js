@@ -16,17 +16,25 @@ const address = "0xf74aa70d29a225c2c033cb3e6a5497a08fe646a9e6f01722862a183725197
 const paySuiSample = async (coins, amounts, recipients) => {
     const tx = new sui.Transaction();
     const coinsRef = [];
+    // this is needed because we need the ref
+    // an object ref is {id: <>, version: <>, digest: <>}
     for (let coin of coins) {
         const res = await provider.getObject({id: coin});
         coinsRef.push(sui.getObjectReference(res));
     }
+    // this will merge all coins into coins[0]
     tx.setGasPayment(coinsRef);
+
+    // here we use the gas payment to split the necessary coins
     recipients.map((recipient, index) => {
         const coin = tx.splitCoin(tx.gas, tx.pure(amounts[index]));
         tx.transferObjects([coin], tx.pure(recipient));
     })
+    // we add the address that will sign
     tx.setSender(address);
+    // how to get the digest of the transaction
     const digest = await signer.getTransactionDigest(tx);
+    // how to get the transation bytes
     const txBytes = await tx.build({provider});
     return {
         digest,
