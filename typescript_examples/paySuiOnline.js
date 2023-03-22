@@ -27,12 +27,13 @@ const paySuiSample = async (coins, amounts, recipients) => {
 
     // here we use the gas payment to split the necessary coins
     recipients.map((recipient, index) => {
-        const coin = tx.splitCoin(tx.gas, tx.pure(amounts[index]));
+        const coin = tx.splitCoins(tx.gas, [tx.pure(amounts[index])]);
         tx.transferObjects([coin], tx.pure(recipient));
     })
     // we add the address that will sign
     tx.setSender(address);
-    // how to get the digest of the transaction
+    tx.setExpiration({Epoch: 123});
+    // how to get the digest of the trEansaction
     const digest = await signer.getTransactionDigest(tx);
     // how to get the transation bytes
     const txBytes = await tx.build({provider});
@@ -43,7 +44,10 @@ const paySuiSample = async (coins, amounts, recipients) => {
 }
 
 // sample data to test
-const coins = ["0x0d1c61b3aa9b011c48230cc368479de4cdf527cd0f82ec4e7ddf52aa2214c9bc", "0x656333e9ef93c86de5e48a674ae7079c19a73b3857bd2129e7e91774b1ba8a0f"];
+const coins = [
+    "0xdbb748090dd71bab04c2b8d79c51a35bec99aa260cc26656e0158d5821291eac", 
+    "0x2799ee31695f8e4bfceb63683b759f1ddd3e6bdb42ee3789985f8108800e25cd"
+];
 const amounts = ['10000', '444', '8899', '3301'];
 const recipients = [
     "0x318456e35f0099ac0487ca222cb701ad1053e049ff4a2e4a472bcb696685bf54",
