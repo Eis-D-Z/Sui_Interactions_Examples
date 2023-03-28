@@ -45,8 +45,8 @@ const paySuiSample = async (coins, amounts, recipients) => {
 
 // sample data to test
 const coins = [
-    "0xdbb748090dd71bab04c2b8d79c51a35bec99aa260cc26656e0158d5821291eac", 
-    "0x2799ee31695f8e4bfceb63683b759f1ddd3e6bdb42ee3789985f8108800e25cd"
+    "0x0819454dd36ae8a1842ec351520573dc6442ff7d4fec4d9c68099b1b753749bf", 
+    "0x5e64a48caff391760440f9f0b25e5e28487248458f36b934570b1fbaf95c469b"
 ];
 const amounts = ['10000', '444', '8899', '3301'];
 const recipients = [
@@ -55,6 +55,6 @@ const recipients = [
     "0x318456e35f0099ac0487ca222cb701ad1053e049ff4a2e4a472bcb696685bf54",
     "0x318456e35f0099ac0487ca222cb701ad1053e049ff4a2e4a472bcb696685bf54"
 ]
-paySuiSample(coins, amounts, recipients).then(res => {console.log(res)});
+// paySuiSample(coins, amounts, recipients).then(res => {console.log(res)});
 
-// provider.requestSuiFromFaucet(address);
+provider.requestSuiFromFaucet(address);
