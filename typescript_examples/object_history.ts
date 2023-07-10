@@ -5,7 +5,7 @@ import {
 
 const provider = new JsonRpcProvider(mainnetConnection);
 
-const trblock = async (block: string, objectId: string) => {
+const getPastOwner = async (block: string, objectId: string) => {
   const result: any = await provider.getTransactionBlock({
     digest: block,
     options: {
@@ -15,10 +15,12 @@ const trblock = async (block: string, objectId: string) => {
 
   let objItem;
 
+  // new object
   [objItem] = result.effects?.created?.filter((item: any) => {
     return item?.reference?.objectId === objectId;
   });
   if (!objItem) {
+    // existing object
     [objItem] = result.effects?.mutated?.filter((item: any) => {
       return item?.reference?.objectId === objectId;
     });
@@ -41,11 +43,9 @@ const trblock = async (block: string, objectId: string) => {
 
   // the owner can be a kiosk, then the first parent is a dynamic field which should be created in the same transaction
   const parent = objItem?.owner?.ObjectOwner;
-  console.log(`Parent: ${parent}`);
   const [dynamicFieldItem] = result.effects?.created?.filter((item: any) => {
     return item?.reference?.objectId === parent;
   });
-  console.log(`Dyn field: ${dynamicFieldItem}`);
   if (dynamicFieldItem) {
     const kioskId = dynamicFieldItem?.owner?.ObjectOwner;
     return getObjectOwner(kioskId);
@@ -92,7 +92,7 @@ const getObj = async (id: string) => {
 };
 
 
-trblock(
+getPastOwner(
   "BKyFR3ufaUSDnm8jABGiog1bNZbcEmbc1RwhUznY6Jgh",
   "0xc2878feb9b8a0c573dbcc4334989b49684e03475adc6b9bedefeaba914a9ba47"
 ).then((owner) => {
