@@ -52,7 +52,7 @@ module kiosk_example::kiosk_fun {
     // Usually this TransferPolicy is wrapped in a shared object so others cannot access it.
     // This function makes sense to be guarded from arbitrary calls, in this example is left unguarded.
 
-    public fun unlock(policyWrapper: &SharedObj, kiosk: &mut Kiosk, kiosk_cap: &KioskOwnerCap, id: ID, ctx: &mut TxContext): KNft {
+    public fun unlock(policyWrapper: &SharedObj, kiosk: &mut Kiosk, kiosk_cap: &KioskOwnerCap, id: ID, ctx: &mut TxContext) {
         // first create a PurchaseCap that allows a single party to buy for free the NFT
         let purchase_cap = kiosk::list_with_purchase_cap<KNft>(kiosk, kiosk_cap, id, 0, ctx);
         // do the purchase
@@ -60,8 +60,9 @@ module kiosk_example::kiosk_fun {
         // resolve the request hot potato
         let (_item_id, _paid, _from_id) = transfer_policy::confirm_request<KNft>(&policyWrapper.empty_transfer_policy, transfer_request);
 
-        nft
+        // here we perofm the mutation and we lock back the NFT
+        nft.exchanged = nft.exchanged + 1;
+        kiosk::lock<KNft>(kiosk, kiosk_cap, &policyWrapper.empty_transfer_policy, nft);
     }
 
-    
 }
