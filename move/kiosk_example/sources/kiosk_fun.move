@@ -3,8 +3,9 @@ module kiosk_example::kiosk_fun {
     use sui::kiosk::{Kiosk, KioskOwnerCap, Self};
     use sui::object::{Self, UID, ID};
     use sui::sui::SUI;
+    use sui::transfer;
     use sui::transfer_policy::{Self, TransferPolicy};
-    use sui::tx_context::TxContext;
+    use sui::tx_context::{Self, TxContext};
 
 
     struct KNft has key, store{
@@ -13,7 +14,7 @@ module kiosk_example::kiosk_fun {
         initial_price: u64
     }
 
-    struct Box has key, store {
+    struct Box has key {
         id: UID,
         nft: KNft
     }
@@ -26,17 +27,18 @@ module kiosk_example::kiosk_fun {
 
     // Pattern to airdrop NFT's into a kiosk with lock
 
-    public fun mint_wrapped(ctx: &mut TxContext): Box {
+    public fun mint_wrapped(ctx: &mut TxContext) {
         let nft = KNft {
             id: object::new(ctx),
             exchanged: 0,
             initial_price: 10
         };
 
-        Box {
+        let wrapped = Box {
             id: object::new(ctx),
             nft
-        }
+        };
+        transfer::transfer(wrapped, tx_context::sender(ctx));
     }
 
     public fun unwrap(kiosk_cap: &KioskOwnerCap, kiosk_: &mut Kiosk, policyWrapper: &SharedObj, box: Box) {
@@ -61,5 +63,5 @@ module kiosk_example::kiosk_fun {
         nft
     }
 
-
+    
 }
